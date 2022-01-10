@@ -1,0 +1,52 @@
+.text-field {
+    -fx-cursor: hand;
+
+    -fx-text-fill: #606266;
+    -fx-background-color: #fff;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: #dcdfe6;
+
+    -fx-pref-height: 32px;
+
+    -fx-padding: 4px 8px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.text-area {
+    -fx-cursor: hand;
+    -fx-wrap-text: true;
+
+    -fx-text-fill: #606266;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: #dcdfe6;
+    -fx-background-color: #fff;
+
+    -fx-padding: 4px 8px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.text-area .content {
+    -fx-background-color: #fff;
+}
+
+.text-area:hover, .text-field:hover {
+    -fx-border-color: #c0c4cc;
+}
+
+.text-area:focused, .text-field:focused {
+    -fx-border-color: #409eff;
+    -fx-background-insets: 0;
+}
+
+.text-area:disabled, .text-field:disabled {
+    -fx-opacity: 1;
+    -fx-background-color: #f5f7fa;
+    -fx-border-color: #e4e7ed;
+    -fx-text-fill: #c0c4cc;
+}

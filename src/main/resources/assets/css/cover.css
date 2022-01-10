@@ -1,0 +1,28 @@
+#top-box {
+    -fx-min-height: 0 !important;
+    -fx-max-height: 0 !important;
+    -fx-padding: 0 !important;
+}
+
+#bottom-box {
+    -fx-padding: 0 !important;
+    -fx-alignment: BOTTOM_CENTER !important;
+}
+
+#menu-button {
+    -icon-size: 40;
+}
+
+#tab-bar {
+    -fx-max-height: 36 !important;
+}
+
+#add-button {
+    -fx-min-height: 36 !important;
+    -fx-max-height: 36 !important;
+}
+
+.logo {
+    -fx-graphic: url("../image/logo.png");
+}
+
