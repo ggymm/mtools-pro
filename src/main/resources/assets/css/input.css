@@ -9,8 +9,8 @@
 
     -fx-pref-height: 32px;
 
-    -fx-padding: 4px 8px;
-    -fx-font-size: 14px;
+    -fx-padding: 6px 8px;
+    -fx-font-size: 13px;
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
 }
@@ -25,7 +25,7 @@
     -fx-border-color: #dcdfe6;
     -fx-background-color: #fff;
 
-    -fx-padding: 4px 8px;
+    -fx-padding: 6px 8px;
     -fx-font-size: 14px;
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;

@@ -1,0 +1,53 @@
+.radio-button, .check-box {
+    -fx-cursor: hand;
+}
+
+.check-box StackPane, .radio-button StackPane {
+    -fx-background-insets: 0;
+}
+
+.radio-button > .radio {
+    -fx-background-color: #fff;
+    -fx-background-radius: 100%;
+    -fx-border-radius: 100%;
+    -fx-pref-width: 14px;
+    -fx-pref-height: 14px;
+    -fx-border-color: #dde0e6;
+}
+
+.check-box > .box {
+    -fx-background-color: #fff;
+    -fx-border-color: #dde0e6;
+    -fx-pref-width: 14px;
+    -fx-pref-height: 14px;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 2px;
+}
+
+.check-box:selected, .radio-button:selected {
+    -fx-text-fill: #409eff;
+}
+
+.check-box:hover > .box, .radio-button:hover > .radio {
+    -fx-border-color: #409eff;
+}
+
+.check-box:selected > .box, .radio-button:selected > .radio {
+    -fx-background-color: #409eff;
+    -fx-border-color: #409eff;
+}
+
+.check-box > .box > .mark {
+    -fx-background-color: #fff;
+    -fx-padding: 2px;
+    -fx-shape: "M407.008 707.008L196 496q-12.992-12.992-31.008-8t-22.496 22.496 8.512 31.488l256 256 512-512q8.992-10.016 8.512-23.008t-10.016-22.496-22.016-9.504-22.496 8.992z";
+}
+
+.radio-button > .radio > .dot {
+    -fx-background-color: #fff;
+    -fx-background-radius: 100%;
+    -fx-border-radius: 100%;
+    -fx-pref-width: 14px;
+    -fx-pref-height: 14px;
+    -fx-background-insets: 1px;
+}
