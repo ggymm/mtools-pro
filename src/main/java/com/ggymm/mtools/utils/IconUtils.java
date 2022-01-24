@@ -1,4 +1,4 @@
-package com.ggymm.mtools.toolkit;
+package com.ggymm.mtools.utils;
 
 import de.jensd.fx.glyphs.GlyphIcons;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;

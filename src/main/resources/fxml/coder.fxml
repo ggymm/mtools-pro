@@ -1,42 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.String?>
-
+<?import java.lang.*?>
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ggymm.mtools.modules.coder.CoderController">
     <children>
-        <GridPane alignment="CENTER" hgap="24.0" layoutX="55.0" layoutY="45.0" prefHeight="610.0" prefWidth="536.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <GridPane alignment="TOP_CENTER" hgap="24.0" layoutX="55.0" layoutY="45.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                  AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
             <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="108.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="276.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="85.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="480.0" prefWidth="480.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="48.0" minHeight="48.0" prefHeight="48.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="48.0" minHeight="48.0" prefHeight="48.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="48.0" minHeight="48.0" prefHeight="48.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label text="数据库" />
                 <Label text="数据表" GridPane.rowIndex="1" />
-                <Button mnemonicParsing="false" text="刷新" GridPane.columnIndex="2">
+                <Button fx:id="refreshDatabaseList" mnemonicParsing="false" text="刷新" GridPane.columnIndex="2">
                     <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-primary" />
                     </styleClass>
                 </Button>
-                <ComboBox maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" text="选择表" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <styleClass>
-                  <String fx:value="btn" />
-                  <String fx:value="btn-primary" />
-               </styleClass>
-            </Button>
+                <ComboBox fx:id="databaseList" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" />
+                <TextField fx:id="tableName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Button fx:id="selectTable" mnemonicParsing="false" text="选择表" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                    </styleClass>
+                </Button>
+                <Label text="生成位置" GridPane.rowIndex="2" />
+                <TextField fx:id="outputPath" editable="false" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Button fx:id="choosePath" mnemonicParsing="false" text="选择文件夹" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                    </styleClass>
+                </Button>
+                <Label text="生成配置" GridPane.rowIndex="3" />
+                <Label text="生成类包名" GridPane.rowIndex="6" />
+                <Label text="父类完整包名" GridPane.rowIndex="7" />
+                <Label text="实体类排除字段" GridPane.rowIndex="8" />
+                <Label text="自动填充字段" GridPane.rowIndex="9" />
+                <TextField fx:id="packageName" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <TextField fx:id="parentPackageName" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <TextField fx:id="excludeColumn" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <TextField fx:id="autoFillColumn" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <children>
+                        <CheckBox fx:id="isOutputCover" mnemonicParsing="false" text="覆盖存在文件" />
+                        <CheckBox fx:id="isOnlyEntity" mnemonicParsing="false" text="只生成实体类和Mapper">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="isUseLombok" mnemonicParsing="false" text="使用Lombok">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                        </CheckBox>
+                    </children>
+                </HBox>
+                <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <children>
+                        <CheckBox fx:id="isUseParent" mnemonicParsing="false" text="实体类继承父类" />
+                        <CheckBox fx:id="isAutoFillColumn" mnemonicParsing="false" text="添加插入/更新自动填充注解">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="isFormatDateColumn" mnemonicParsing="false" text="时间字段格式化">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                        </CheckBox>
+                    </children>
+                </HBox>
+                <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <children>
+                        <CheckBox fx:id="isGenFrontEnd" mnemonicParsing="false" text="生成前端代码" />
+                        <CheckBox fx:id="isUseCommentAsLabel" mnemonicParsing="false" text="使用字段注释做标签值">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="isUseOriginColumn" mnemonicParsing="false" text="使用原始字段">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                        </CheckBox>
+                    </children>
+                </HBox>
+                <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                    <children>
+                        <Button fx:id="genCode" mnemonicParsing="false" text="生成代码">
+                            <styleClass>
+                                <String fx:value="btn" />
+                                <String fx:value="btn-primary" />
+                            </styleClass>
+                        </Button>
+                        <Button fx:id="saveConfig" mnemonicParsing="false" text="保存配置">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                            <styleClass>
+                                <String fx:value="btn" />
+                                <String fx:value="btn-primary" />
+                            </styleClass>
+                        </Button>
+                        <Button fx:id="openFolder" mnemonicParsing="false" text="打开生成目录">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                            <styleClass>
+                                <String fx:value="btn" />
+                                <String fx:value="btn-primary" />
+                            </styleClass>
+                        </Button>
+                    </children>
+                </HBox>
             </children>
         </GridPane>
     </children>

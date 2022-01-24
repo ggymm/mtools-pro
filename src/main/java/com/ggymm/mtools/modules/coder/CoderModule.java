@@ -1,8 +1,10 @@
 package com.ggymm.mtools.modules.coder;
 
+import com.dlsc.workbenchfx.Workbench;
 import com.dlsc.workbenchfx.model.WorkbenchModule;
-import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -12,18 +14,32 @@ import java.io.IOException;
  */
 public class CoderModule extends WorkbenchModule {
 
-    public CoderModule() {
-        super("代码生成器", MaterialDesignIcon.HUMAN_HANDSUP);
+    private final Stage stage;
+
+    public CoderModule(Stage stage) {
+        super("代码生成器", new Image("assets/icon/coder.png"));
+        this.stage = stage;
     }
 
     @Override
     public Node activate() {
         try {
-            return  CoderController.getView();
+            return CoderController.getView();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void init(Workbench workbench) {
+        super.init(workbench);
+        stage.setHeight(800);
+    }
+
+    @Override
+    public void deactivate(){
+
     }
 }
 

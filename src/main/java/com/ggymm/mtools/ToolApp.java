@@ -1,6 +1,7 @@
 package com.ggymm.mtools;
 
 import com.dlsc.workbenchfx.Workbench;
+import com.ggymm.mtools.controller.CustomTab;
 import com.ggymm.mtools.modules.coder.CoderModule;
 import com.ggymm.mtools.modules.test.TestModule;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -10,9 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
-import static com.ggymm.mtools.toolkit.IconUtils.IconType.FontAwesome;
-import static com.ggymm.mtools.toolkit.IconUtils.IconType.MaterialDesign;
-import static com.ggymm.mtools.toolkit.IconUtils.createIcon;
+import static com.ggymm.mtools.utils.IconUtils.IconType.FontAwesome;
+import static com.ggymm.mtools.utils.IconUtils.IconType.MaterialDesign;
+import static com.ggymm.mtools.utils.IconUtils.createIcon;
 
 /**
  * @author gongym
@@ -28,7 +29,7 @@ public class ToolApp extends Application {
 
     @Override
     public void start(Stage stage) {
-        Scene scene = new Scene(initWorkbench());
+        Scene scene = new Scene(initWorkbench(stage));
 
         stage.setTitle("工具箱");
         stage.setScene(scene);
@@ -42,14 +43,15 @@ public class ToolApp extends Application {
         initStyle(scene);
     }
 
-    private Workbench initWorkbench() {
+    private Workbench initWorkbench(Stage stage) {
         MenuItem[] menuItems = initMenu();
 
         workbench = Workbench.builder(
-                        new CoderModule(),
+                        new CoderModule(stage),
                         new TestModule()
                 ).navigationDrawerItems(menuItems)
                 .modulesPerPage(6)
+                .tabFactory(CustomTab::new)
                 .build();
 
         return workbench;
@@ -69,9 +71,12 @@ public class ToolApp extends Application {
     private void initStyle(Scene scene) {
         // 设置自定义样式
         String[] styles = new String[]{
+                "assets/css/font.css",
                 "assets/css/main.css",
+
                 "assets/css/button.css",
 
+                "assets/css/checkbox.css",
                 "assets/css/input.css",
                 "assets/css/select.css",
 
