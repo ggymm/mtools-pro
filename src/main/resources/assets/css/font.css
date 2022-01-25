@@ -1,3 +1,7 @@
 @font-face {
-    src: url('../font/pf.ttf');
+    src: url('../font/PingFangSC-Regular.ttf');
+}
+
+@font-face {
+    src: url('../font/JetBrainsMono-Regular.ttf');
 }

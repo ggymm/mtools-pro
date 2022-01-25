@@ -12,6 +12,7 @@
 
     -fx-padding: 4px 16px;
     -fx-font-size: 13px;
+    -fx-font-family: 'JetBrains Mono Regular';
     -fx-border-radius: 4px;
     -fx-background-radius: 4px;
 }
