@@ -107,13 +107,13 @@
                 </HBox>
                 <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="10">
                     <children>
-                        <Button fx:id="genCode" mnemonicParsing="false" text="生成代码">
+                        <Button fx:id="genCode" minWidth="100.0" mnemonicParsing="false" text="生成代码">
                             <styleClass>
                                 <String fx:value="btn" />
                                 <String fx:value="btn-primary" />
                             </styleClass>
                         </Button>
-                        <Button fx:id="saveConfig" mnemonicParsing="false" text="保存配置">
+                        <Button fx:id="saveConfig" minWidth="100.0" mnemonicParsing="false" text="保存配置">
                             <HBox.margin>
                                 <Insets left="24.0" />
                             </HBox.margin>
@@ -122,7 +122,7 @@
                                 <String fx:value="btn-primary" />
                             </styleClass>
                         </Button>
-                        <Button fx:id="openFolder" mnemonicParsing="false" text="打开生成目录">
+                        <Button fx:id="openFolder" minWidth="100.0" mnemonicParsing="false" text="打开生成目录">
                             <HBox.margin>
                                 <Insets left="24.0" />
                             </HBox.margin>

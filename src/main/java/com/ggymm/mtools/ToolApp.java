@@ -2,8 +2,9 @@ package com.ggymm.mtools;
 
 import com.dlsc.workbenchfx.Workbench;
 import com.ggymm.mtools.controller.CustomTab;
+import com.ggymm.mtools.modules.logcat.LogcatModule;
 import com.ggymm.mtools.modules.coder.CoderModule;
-import com.ggymm.mtools.modules.test.TestModule;
+import com.ggymm.mtools.modules.encode.EncodeModule;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import javafx.application.Application;
@@ -33,10 +34,10 @@ public class ToolApp extends Application {
 
         stage.setTitle("工具箱");
         stage.setScene(scene);
-        stage.setWidth(900);
-        stage.setMinWidth(600);
-        stage.setHeight(600);
-        stage.setMinHeight(400);
+        stage.setWidth(1000);
+        stage.setHeight(750);
+        stage.setMinWidth(900);
+        stage.setMinHeight(600);
         stage.show();
         stage.centerOnScreen();
 
@@ -48,9 +49,9 @@ public class ToolApp extends Application {
 
         workbench = Workbench.builder(
                         new CoderModule(stage),
-                        new TestModule()
+                        new EncodeModule(stage),
+                        new LogcatModule()
                 ).navigationDrawerItems(menuItems)
-                .modulesPerPage(6)
                 .tabFactory(CustomTab::new)
                 .build();
 

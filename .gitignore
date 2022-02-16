@@ -1,6 +1,7 @@
 /.idea
 /target
 
+/logs
 /temp
 
 mtools-pro.db

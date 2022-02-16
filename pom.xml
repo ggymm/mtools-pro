@@ -25,8 +25,24 @@
         <dependency>
             <groupId>com.dlsc.workbenchfx</groupId>
             <artifactId>workbenchfx-core</artifactId>
-            <!--suppress MavenPackageUpdate -->
             <version>8.1.0</version>
+        </dependency>
+
+        <!-- 日志配置 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.10</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.10</version>
         </dependency>
 
         <!-- 字体配置 -->
@@ -63,7 +79,6 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <!--suppress MavenPackageUpdate -->
             <version>4.0.3</version>
         </dependency>
         <dependency>
@@ -85,6 +100,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
+                    <include>**/*.xml</include>
                     <include>**/*.ttf</include>
                     <include>**/*.css</include>
                     <include>**/*.png</include>

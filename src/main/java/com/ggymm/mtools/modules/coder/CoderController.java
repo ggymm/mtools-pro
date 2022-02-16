@@ -2,6 +2,8 @@ package com.ggymm.mtools.modules.coder;
 
 import com.ggymm.mtools.database.mapper.DatabaseMapper;
 import com.ggymm.mtools.database.model.Database;
+import com.ggymm.mtools.utils.DBUtils;
+import com.ggymm.mtools.utils.model.Table;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -65,8 +66,6 @@ public class CoderController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initView();
         initEvent();
-
-        System.out.println(Font.getFontNames());
     }
 
     private void initView() {
@@ -89,9 +88,15 @@ public class CoderController implements Initializable {
                 }
             }
         });
-        this.refreshDatabaseList.setOnMouseClicked((e) -> {
+        this.refreshDatabaseList.setOnMouseClicked((event) -> {
 
         });
 
+        this.selectTable.setOnMouseClicked((event) -> {
+            final List<Table> tables = DBUtils.tableList(this.currentDB);
+            for (Table table : tables) {
+                System.out.println(table);
+            }
+        });
     }
 }
