@@ -39,10 +39,10 @@
 }
 
 .list-view .list-cell {
-    -fx-padding: 0 20px;
-    -fx-pref-height: 34px;
+    -fx-padding: 0 16px;
+    -fx-pref-height: 32px;
 
-    -fx-font-size: 14px;
+    -fx-font-size: 13px;
     -fx-text-fill: #606266;
     -fx-cursor: hand;
 }

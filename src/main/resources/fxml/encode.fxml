@@ -46,13 +46,13 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                             <children>
-                                <Button fx:id="encode" minWidth="64.0" mnemonicParsing="false" text="编码">
+                                <Button fx:id="encode" minWidth="120.0" mnemonicParsing="false" text="编码">
                                     <styleClass>
                                         <String fx:value="btn" />
                                         <String fx:value="btn-primary" />
                                     </styleClass>
                                 </Button>
-                                <Button fx:id="decode" minWidth="64.0" mnemonicParsing="false" text="解码">
+                                <Button fx:id="decode" minWidth="120.0" mnemonicParsing="false" text="解码">
                                     <HBox.margin>
                                         <Insets left="24.0" />
                                     </HBox.margin>

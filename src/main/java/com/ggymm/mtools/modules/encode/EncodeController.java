@@ -1,5 +1,8 @@
 package com.ggymm.mtools.modules.encode;
 
+import cn.hutool.core.codec.Base64;
+import cn.hutool.core.text.UnicodeUtil;
+import cn.hutool.core.util.URLUtil;
 import com.ggymm.mtools.modules.coder.CoderController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,6 +30,9 @@ public class EncodeController implements Initializable {
     public Button encode;
     public Button decode;
 
+    private String currentType;
+    private String currentCharType;
+
     public static Node getView() throws IOException {
         URL url = CoderController.class.getResource("/fxml/encode.fxml");
         FXMLLoader fXMLLoader = new FXMLLoader(url);
@@ -41,15 +47,47 @@ public class EncodeController implements Initializable {
 
     private void initView() {
         this.encodeTypeList.getItems().addAll("Base64", "Unicode", "URL", "UTF-8");
+        this.encodeTypeList.setValue("Base64");
         this.characterTypeList.getItems().addAll("UTF-8", "GBK");
+        this.characterTypeList.setValue("UTF-8");
     }
 
     private void initEvent() {
+        this.encodeTypeList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.currentType = newValue);
+        this.characterTypeList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.currentCharType = newValue);
+
         this.encode.setOnMouseClicked((event) -> {
             // 编码
+            String output = "";
+            switch (this.currentType) {
+                case "Base64":
+                    output = Base64.encode(this.input.getText(), this.currentCharType);
+                    break;
+                case "Unicode":
+                    output = UnicodeUtil.toUnicode(this.input.getText());
+                    break;
+                case "URL":
+                    output = URLUtil.encode((this.input.getText()));
+                    break;
+                case "UTF-8":
+            }
+            this.output.setText(output);
         });
         this.decode.setOnMouseClicked((event) -> {
             // 解码
+            String input = "";
+            switch (this.currentType) {
+                case "Base64":
+                    input = Base64.decodeStr(this.output.getText(), this.currentCharType);
+                    break;
+                case "Unicode":
+                    input = UnicodeUtil.toString(this.output.getText());
+                    break;
+                case "URL":
+                    input = URLUtil.decode(this.output.getText(), this.currentCharType);
+                case "UTF-8":
+            }
+            this.input.setText(input);
         });
     }
 }

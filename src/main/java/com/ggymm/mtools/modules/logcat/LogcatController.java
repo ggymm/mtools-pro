@@ -1,6 +1,8 @@
 package com.ggymm.mtools.modules.logcat;
 
+import cn.hutool.core.util.StrUtil;
 import com.ggymm.mtools.modules.coder.CoderController;
+import com.ggymm.mtools.utils.CommandUtils;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -27,21 +30,28 @@ public class LogcatController implements Initializable {
     public AnchorPane root;
 
     public ComboBox<String> deviceList;
-    public Button adbStart;
-    public Button adbStop;
-
     public Button refreshDevice;
-    public ComboBox<String> threadList;
+    public Button adbRestart;
+    public Button saveConsole;
+    public Button cleanConsole;
 
-    public Button refreshThread;
+    public ComboBox<String> levels;
+
+    public Button startOutput;
+    public Button stopOutput;
+
     public TextField filter;
 
     public ListView<String> console;
 
+    private String currentDevice;
+    private String currentLevel;
+    private Process showLogProcess;
+
     public static Node getView() throws IOException {
-        URL url = CoderController.class.getResource("/fxml/logcat.fxml");
-        FXMLLoader fXMLLoader = new FXMLLoader(url);
-        return fXMLLoader.load();
+        final URL url = CoderController.class.getResource("/fxml/logcat.fxml");
+        final FXMLLoader fxmlLoader = new FXMLLoader(url);
+        return fxmlLoader.load();
     }
 
     @Override
@@ -52,32 +62,106 @@ public class LogcatController implements Initializable {
 
     private void initView() {
         root.heightProperty().addListener((observable, oldValue, newValue) -> {
-            double otherHeight = 48.0 + 8.0 * 3 + 48.0 + 48.0 + 48.0;
-            console.setMinHeight(newValue.doubleValue() - otherHeight);
+            double otherHeight = 48.0 + 24.0 * 2 + 32.0 * 2;
+            this.console.setMinHeight(newValue.doubleValue() - otherHeight);
         });
     }
 
     private void initEvent() {
-        this.refreshThread.setOnMouseClicked((event) -> {
-            try {
-                Process process = Runtime.getRuntime().exec("C:\\Product\\mtools-pro\\lib\\adb\\adb.exe logcat -v time");
-                new Thread(() -> {
+        final String adbPath = "lib/adb/adb.exe ";
 
-                    try (InputStreamReader reader = new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8)) {
+        // 监听设备选择
+        this.deviceList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.currentDevice = " " + newValue + " ");
+        // 监听进程选择
+        this.levels.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.currentLevel = newValue);
+
+        // 刷新设备列表
+        this.refreshDevice.setOnMouseClicked((event) -> {
+            this.deviceList.getItems().clear();
+            new Thread(() -> {
+                final ArrayList<String> result = new ArrayList<>();
+                try {
+                    final Process process = Runtime.getRuntime().exec(adbPath + "devices");
+                    final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        if ("List of devices attached".equals(line) || StrUtil.isBlank(line)) {
+                            continue;
+                        }
+                        final String newLine = StrUtil.replace(line, "\tdevice", "", true);
+                        result.add(newLine);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Platform.runLater(() -> this.deviceList.getItems().addAll(result));
+            }).start();
+        });
+
+        // 重启adb服务
+        this.adbRestart.setOnMouseClicked((event) -> {
+            // 需要清空设备列表
+            this.deviceList.getItems().clear();
+            CommandUtils.asyncRun(adbPath + "kill-server", adbPath + "start-server");
+        });
+
+        // 启动抓取日志
+        this.startOutput.setOnMouseClicked((event) -> {
+            if (showLogProcess != null && showLogProcess.isAlive()) {
+                showLogProcess.destroyForcibly();
+            }
+            final String filter = this.filter.getText();
+            new Thread(() -> {
+                try {
+                    final StringBuilder command = new StringBuilder(adbPath);
+
+                    // 选择设备
+                    if (StrUtil.isNotBlank(currentDevice)) {
+                        Runtime.getRuntime().exec(adbPath + "-s" + currentDevice + "logcat -c");
+                        command.append("-s").append(currentDevice).append("logcat -v time");
+                    } else {
+                        Runtime.getRuntime().exec(adbPath + "logcat -c");
+                        command.append("logcat -v time");
+                    }
+
+                    // 设置日志输出级别
+                    if (StrUtil.isNotBlank(this.currentLevel)) {
+                        final char level = this.currentLevel.toUpperCase().charAt(0);
+                        command.append(" *:").append(level);
+                    }
+
+                    showLogProcess = Runtime.getRuntime().exec(command.toString());
+                    try (InputStreamReader reader = new InputStreamReader(showLogProcess.getInputStream(), StandardCharsets.UTF_8)) {
                         final BufferedReader bufferedReader = new BufferedReader(reader);
                         String line;
                         while ((line = bufferedReader.readLine()) != null) {
-                            String finalLine = line;
+                            // 按照规则进行筛选
+                            // 添加到页面
+                            final String finalLine = line;
                             Platform.runLater(() -> console.getItems().add(finalLine));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }).start();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }).start();
+        });
+
+        // 停止抓取日志
+        this.stopOutput.setOnMouseClicked((event) -> {
+            if (showLogProcess != null && showLogProcess.isAlive()) {
+                showLogProcess.destroyForcibly();
             }
         });
 
+        // 保存日志
+        this.saveConsole.setOnMouseClicked((event) -> {
+            // 打开选择保存目录
+        });
+
+        // 清空日志
+        this.cleanConsole.setOnMouseClicked((event) -> this.console.getItems().clear());
     }
 }

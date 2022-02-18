@@ -34,11 +34,10 @@ public class CoderModule extends WorkbenchModule {
     @Override
     public void init(Workbench workbench) {
         super.init(workbench);
-        stage.setHeight(800);
     }
 
     @Override
-    public void deactivate(){
+    public void deactivate() {
 
     }
 }
