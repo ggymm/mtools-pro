@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<AnchorPane fx:id="root" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="640.0" minWidth="640.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ggymm.mtools.modules.coder.controller.TableListController">
+    <children>
+        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
+            <children>
+                <ListView fx:id="tableList" prefHeight="560.0" />
+                <HBox alignment="CENTER" maxHeight="80.0" minHeight="80.0" prefHeight="80.0">
+                    <children>
+                        <Button fx:id="selectAll" minWidth="100.0" mnemonicParsing="false" text="全选">
+                            <styleClass>
+                                <String fx:value="btn" />
+                                <String fx:value="btn-primary" />
+                            </styleClass>
+                        </Button>
+                        <Button fx:id="reverseSelect" minWidth="100.0" mnemonicParsing="false" text="反选">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                            <styleClass>
+                                <String fx:value="btn" />
+                                <String fx:value="btn-primary" />
+                            </styleClass>
+                        </Button>
+                        <Button fx:id="confirm" minWidth="100.0" mnemonicParsing="false" text="确定">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                            <styleClass>
+                                <String fx:value="btn" />
+                                <String fx:value="btn-primary" />
+                            </styleClass>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

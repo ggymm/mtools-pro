@@ -24,18 +24,18 @@ public class CustomTabSkin extends SkinBase<CustomTab> {
     }
 
     private void initLayout() {
-        HBox controlBox = new HBox();
+        final HBox controlBox = new HBox();
         controlBox.getStyleClass().add("tab-box");
 
         // 标题
-        Label name = new Label();
+        final Label name = new Label();
         name.getStyleClass().add("tab-name-lbl");
         name.textProperty().bind(this.nameProp);
 
         // 关闭按钮
-        StackPane closeIcon = new StackPane();
+        final StackPane closeIcon = new StackPane();
         closeIcon.getStyleClass().add("shape");
-        Button closeBtn = new Button("", closeIcon);
+        final Button closeBtn = new Button("", closeIcon);
         closeBtn.getStyleClass().addAll("icon", "close-icon");
         closeBtn.setOnAction(e -> getSkinnable().close());
 

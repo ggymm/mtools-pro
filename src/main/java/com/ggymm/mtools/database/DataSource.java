@@ -21,9 +21,9 @@ public class DataSource {
     }
 
     public static void init() {
-        HikariConfig config = new HikariConfig();
-        String homePath = System.getProperty("user.dir");
-        String url = "jdbc:sqlite:" + homePath + "/mtools-pro.db";
+        final HikariConfig config = new HikariConfig();
+        final String homePath = System.getProperty("user.dir");
+        final String url = "jdbc:sqlite:" + homePath + "/mtools-pro.db";
         config.setJdbcUrl(url);
         dataSource = new HikariDataSource(config);
     }

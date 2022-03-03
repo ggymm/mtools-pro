@@ -22,8 +22,8 @@ public class DatabaseMapper {
         // 获取数据库连接查询数据库
         Connection connection = DataSource.getConnection();
         if (connection != null) {
-            QueryRunner queryRunner = new QueryRunner();
-            String sql = "select * from database";
+            final QueryRunner queryRunner = new QueryRunner();
+            final String sql = "select * from database";
             try {
                 databaseList = queryRunner.query(connection, sql, new BeanListHandler<>(Database.class));
             } catch (SQLException e) {

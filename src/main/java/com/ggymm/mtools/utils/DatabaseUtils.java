@@ -16,7 +16,7 @@ import java.util.Map;
  * @author gongym
  * @version 创建时间: 2022-01-14 09:49
  */
-public class DBUtils {
+public class DatabaseUtils {
 
     public static final String QUERY_TABLE_LIST_SQL = "SELECT DISTINCT TABLE_NAME, TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = ?";
 
@@ -39,18 +39,18 @@ public class DBUtils {
     }
 
     public static List<Table> tableList(Database db) {
-        List<Table> tableList = new ArrayList<>();
+        final List<Table> tableList = new ArrayList<>();
 
-        Connection connection = createConnection(db);
-        QueryRunner queryRunner = new QueryRunner();
+        final Connection connection = createConnection(db);
+        final QueryRunner queryRunner = new QueryRunner();
         try {
-            List<Map<String, Object>> tableMapList = new ArrayList<>();;
+            List<Map<String, Object>> tableMapList = new ArrayList<>();
             if ("mysql".equals(db.getDriver())) {
-                tableMapList  = queryRunner.query(connection, QUERY_TABLE_LIST_SQL, new MapListHandler(), db.getName());
+                tableMapList = queryRunner.query(connection, QUERY_TABLE_LIST_SQL, new MapListHandler(), db.getName());
             }
 
             for (Map<String, Object> tableMap : tableMapList) {
-                Table table = new Table();
+                final Table table = new Table();
                 table.setTableName(tableMap.get("TABLE_NAME").toString());
                 table.setTableComment(tableMap.get("TABLE_COMMENT").toString());
 

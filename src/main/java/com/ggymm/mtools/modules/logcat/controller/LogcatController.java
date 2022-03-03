@@ -1,7 +1,7 @@
-package com.ggymm.mtools.modules.logcat;
+package com.ggymm.mtools.modules.logcat.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.ggymm.mtools.modules.coder.CoderController;
+import com.ggymm.mtools.modules.coder.controller.CoderController;
 import com.ggymm.mtools.utils.CommandUtils;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -50,8 +51,8 @@ public class LogcatController implements Initializable {
 
     public static Node getView() throws IOException {
         final URL url = CoderController.class.getResource("/fxml/logcat.fxml");
-        final FXMLLoader fxmlLoader = new FXMLLoader(url);
-        return fxmlLoader.load();
+        final FXMLLoader loader = new FXMLLoader(url);
+        return loader.load();
     }
 
     @Override
@@ -79,7 +80,7 @@ public class LogcatController implements Initializable {
         this.refreshDevice.setOnMouseClicked((event) -> {
             this.deviceList.getItems().clear();
             new Thread(() -> {
-                final ArrayList<String> result = new ArrayList<>();
+                final List<String> result = new ArrayList<>();
                 try {
                     final Process process = Runtime.getRuntime().exec(adbPath + "devices");
                     final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));

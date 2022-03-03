@@ -1,6 +1,7 @@
 package com.ggymm.mtools.modules.logcat;
 
 import com.dlsc.workbenchfx.model.WorkbenchModule;
+import com.ggymm.mtools.modules.logcat.controller.LogcatController;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 

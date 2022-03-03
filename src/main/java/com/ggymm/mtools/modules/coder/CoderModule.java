@@ -2,6 +2,7 @@ package com.ggymm.mtools.modules.coder;
 
 import com.dlsc.workbenchfx.Workbench;
 import com.dlsc.workbenchfx.model.WorkbenchModule;
+import com.ggymm.mtools.modules.coder.controller.CoderController;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -17,7 +18,7 @@ public class CoderModule extends WorkbenchModule {
     private final Stage stage;
 
     public CoderModule(Stage stage) {
-        super("代码生成器", new Image("assets/icon/coder.png"));
+        super("代码生成", new Image("assets/icon/coder.png"));
         this.stage = stage;
     }
 

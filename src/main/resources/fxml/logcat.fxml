@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ggymm.mtools.modules.logcat.LogcatController">
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ggymm.mtools.modules.logcat.controller.LogcatController">
     <children>
         <GridPane vgap="24.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
             <columnConstraints>
@@ -97,7 +97,7 @@
                         </Button>
                     </children>
                 </GridPane>
-                <ListView fx:id="console" fixedCellSize="0.0" prefHeight="300.0" GridPane.rowIndex="2" />
+                <ListView fx:id="console" fixedCellSize="0.0" prefHeight="300.0" styleClass="console" GridPane.rowIndex="2" />
             </children>
         </GridPane>
     </children>

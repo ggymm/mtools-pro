@@ -15,7 +15,7 @@ public class TestDBUtils {
 
     @Test
     public void testTableList() {
-        Database database = new Database();
+        final Database database = new Database();
         database.setId(1L);
         database.setShowName("office_platform(本地)");
         database.setDriver("mysql");
@@ -25,7 +25,7 @@ public class TestDBUtils {
         database.setUsername("root");
         database.setPassword("root");
 
-        List<Table> tableList = DBUtils.tableList(database);
+        List<Table> tableList = DatabaseUtils.tableList(database);
         assert tableList.size() > 0;
 
         for (Table table : tableList) {

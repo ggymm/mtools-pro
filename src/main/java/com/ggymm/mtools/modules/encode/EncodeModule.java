@@ -2,6 +2,7 @@ package com.ggymm.mtools.modules.encode;
 
 import com.dlsc.workbenchfx.Workbench;
 import com.dlsc.workbenchfx.model.WorkbenchModule;
+import com.ggymm.mtools.modules.encode.controller.EncodeController;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;

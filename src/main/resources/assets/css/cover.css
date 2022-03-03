@@ -29,3 +29,11 @@
 .logo {
     -fx-graphic: url("../image/logo.png");
 }
+
+.console {
+    -fx-margin: 32px 0;
+}
+
+.console .list-cell {
+    -fx-padding: 0 24px;
+}

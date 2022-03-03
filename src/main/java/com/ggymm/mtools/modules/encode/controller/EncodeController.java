@@ -1,9 +1,10 @@
-package com.ggymm.mtools.modules.encode;
+package com.ggymm.mtools.modules.encode.controller;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.text.UnicodeUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
-import com.ggymm.mtools.modules.coder.CoderController;
+import com.ggymm.mtools.modules.coder.controller.CoderController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextArea;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ResourceBundle;
 
 /**
@@ -34,9 +36,9 @@ public class EncodeController implements Initializable {
     private String currentCharType;
 
     public static Node getView() throws IOException {
-        URL url = CoderController.class.getResource("/fxml/encode.fxml");
-        FXMLLoader fXMLLoader = new FXMLLoader(url);
-        return fXMLLoader.load();
+        final URL url = CoderController.class.getResource("/fxml/encode.fxml");
+        final FXMLLoader loader = new FXMLLoader(url);
+        return loader.load();
     }
 
     @Override
@@ -58,16 +60,20 @@ public class EncodeController implements Initializable {
 
         this.encode.setOnMouseClicked((event) -> {
             // 编码
+            String input = this.input.getText();
+            if (StrUtil.isBlank(input)) {
+                return;
+            }
             String output = "";
             switch (this.currentType) {
                 case "Base64":
-                    output = Base64.encode(this.input.getText(), this.currentCharType);
+                    output = Base64.encode(input, this.currentCharType);
                     break;
                 case "Unicode":
-                    output = UnicodeUtil.toUnicode(this.input.getText());
+                    output = UnicodeUtil.toUnicode(input);
                     break;
                 case "URL":
-                    output = URLUtil.encode((this.input.getText()));
+                    output = URLUtil.encode(input, Charset.forName(this.currentCharType));
                     break;
                 case "UTF-8":
             }
@@ -75,16 +81,20 @@ public class EncodeController implements Initializable {
         });
         this.decode.setOnMouseClicked((event) -> {
             // 解码
+            String output = this.output.getText();
+            if (StrUtil.isBlank(output)) {
+                return;
+            }
             String input = "";
             switch (this.currentType) {
                 case "Base64":
-                    input = Base64.decodeStr(this.output.getText(), this.currentCharType);
+                    input = Base64.decodeStr(output, this.currentCharType);
                     break;
                 case "Unicode":
-                    input = UnicodeUtil.toString(this.output.getText());
+                    input = UnicodeUtil.toString(output);
                     break;
                 case "URL":
-                    input = URLUtil.decode(this.output.getText(), this.currentCharType);
+                    input = URLUtil.decode(output, this.currentCharType);
                 case "UTF-8":
             }
             this.input.setText(input);
