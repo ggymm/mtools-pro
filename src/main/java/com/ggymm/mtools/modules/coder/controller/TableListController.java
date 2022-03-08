@@ -73,7 +73,7 @@ public class TableListController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.root.heightProperty().addListener((observable, oldValue, newValue) -> {
-            double otherHeight = 80.0;
+            double otherHeight = 100.0;
             this.tableList.setMinHeight(newValue.doubleValue() - otherHeight);
         });
         this.selectAll.setOnMouseClicked((event) -> {

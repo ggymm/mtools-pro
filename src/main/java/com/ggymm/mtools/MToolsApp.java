@@ -7,16 +7,10 @@ import com.ggymm.mtools.modules.document.DocumentModule;
 import com.ggymm.mtools.modules.encode.EncodeModule;
 import com.ggymm.mtools.modules.logcat.LogcatModule;
 import com.ggymm.mtools.utils.StyleUtils;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-
-import static com.ggymm.mtools.utils.IconUtils.IconType.FontAwesome;
-import static com.ggymm.mtools.utils.IconUtils.IconType.MaterialDesign;
-import static com.ggymm.mtools.utils.IconUtils.createIcon;
 
 /**
  * @author gongym
@@ -64,10 +58,10 @@ public class MToolsApp extends Application {
 
     private MenuItem[] initMenu() {
 
-        final MenuItem coder = new MenuItem("代码生成器", createIcon(FontAwesome, FontAwesomeIcon.FILE_CODE_ALT));
+        final MenuItem coder = new MenuItem("代码生成器", null);
         coder.setOnAction(event -> workbench.hideNavigationDrawer());
 
-        final MenuItem setting = new MenuItem("应用设置", createIcon(MaterialDesign, MaterialDesignIcon.SETTINGS));
+        final MenuItem setting = new MenuItem("应用设置", null);
         setting.setOnAction(event -> workbench.hideNavigationDrawer());
 
         return new MenuItem[]{coder, setting};
