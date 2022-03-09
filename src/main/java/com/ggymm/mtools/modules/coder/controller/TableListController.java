@@ -47,7 +47,7 @@ public class TableListController implements Initializable {
     private Stage stage;
     private Database currentDatabase;
 
-    public static List<String> showTableList(Database currentDatabase) {
+    public static String showTableList(Database currentDatabase) {
         try {
             final URL url = CoderController.class.getResource("/fxml/table-list.fxml");
             final FXMLLoader loader = new FXMLLoader(url);
@@ -136,15 +136,15 @@ public class TableListController implements Initializable {
         }).start();
     }
 
-    public List<String> getSelectedTables() {
-        final List<String> selectedTableList = new ArrayList<>();
+    public String getSelectedTables() {
+        final StringBuilder selectedTableList = new StringBuilder();
         final ObservableList<TableItem> tableItemList = tableList.getItems();
         for (TableItem table : tableItemList) {
             if (table.getSelected().get()) {
-                selectedTableList.add(table.toString());
+                selectedTableList.append(";").append(table);
             }
         }
-        return selectedTableList;
+        return selectedTableList.toString();
     }
 
     @Data

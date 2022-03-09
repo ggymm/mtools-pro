@@ -1,6 +1,5 @@
 package com.ggymm.mtools.modules.coder.controller;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import com.ggymm.mtools.database.mapper.DatabaseMapper;
@@ -100,9 +99,9 @@ public class CoderController implements Initializable {
         this.parentPackageName.setText("com.ninelock.core.base.BaseEntity");
         this.parentPackageName.setEditable(false);
         this.excludeColumn.setDisable(true);
-        this.excludeColumn.setText("create_time,create_id,creator,update_time,update_id,del_flag");
+        this.excludeColumn.setText("create_time;create_id;creator;update_time;update_id;del_flag");
         this.excludeColumn.setEditable(false);
-        this.autoFillColumn.setText("create_time,create_id,creator,update_time,update_id,del_flag");
+        this.autoFillColumn.setText("create_time;create_id;creator;update_time;update_id;del_flag");
         this.autoFillColumn.setEditable(false);
     }
 
@@ -123,14 +122,7 @@ public class CoderController implements Initializable {
         });
 
         // 选择数据库表
-        this.selectTable.setOnMouseClicked((event) -> {
-            List<String> tableList = TableListController.showTableList(this.currentDatabase);
-            if (CollUtil.isEmpty(tableList)) {
-                return;
-            }
-            final String tableListStr = StrUtil.join(";", tableList.toArray());
-            this.tableNameList.setText(tableListStr);
-        });
+        this.selectTable.setOnMouseClicked((event) -> this.tableNameList.setText(TableListController.showTableList(this.currentDatabase)));
 
         // 选择文件输出路径
         this.choosePath.setOnMouseClicked((event) -> {

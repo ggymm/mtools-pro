@@ -51,7 +51,9 @@ public class TemplateData {
      */
     private String packageName;
     private String className;
+    private String lowerCamelTableName;
     private Boolean hasId = false;
+    private String idType;
     private Boolean hasTableLogic = false;
     private Boolean hasFormatDate = false;
 
@@ -76,18 +78,20 @@ public class TemplateData {
             this.packageName = LOWER_UNDERSCORE.to(LOWER_CAMEL, tableName);
             this.className = LOWER_UNDERSCORE.to(UPPER_CAMEL, tableName);
         }
+
+        this.lowerCamelTableName = LOWER_UNDERSCORE.to(LOWER_CAMEL, tableName);
     }
 
     public void setFieldList(List<TableField> fieldList) {
         if (this.useParent && StrUtil.isNotBlank(this.basePackageName)
                 && StrUtil.isNotBlank(this.excludeColumn)) {
-            this.excludeColumns = this.excludeColumn.split(",");
+            this.excludeColumns = this.excludeColumn.split(";");
         } else {
             this.useParent = false;
         }
 
         if (this.autoFill && StrUtil.isNotBlank(autoFillColumn)) {
-            this.autoFillColumns = this.autoFillColumn.split(",");
+            this.autoFillColumns = this.autoFillColumn.split(";");
         } else {
             this.autoFill = false;
         }
@@ -95,6 +99,7 @@ public class TemplateData {
         for (TableField field : fieldList) {
             if (!this.hasId && field.getIsKey()) {
                 this.hasId = true;
+                this.idType = formatJavaType(field.getDataType());
             }
 
             if (this.formatDate) {
@@ -105,7 +110,7 @@ public class TemplateData {
             }
 
             if (this.tableLogic) {
-                if ("del_flag".equals(field.getDataType())) {
+                if ("del_flag".equals(field.getColumnName())) {
                     field.setTableLogic(true);
                     this.hasTableLogic = true;
                 }
