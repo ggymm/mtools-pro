@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>iptables-restore.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="iptables-restore">iptables-restore</h1>
+<p>还原iptables表的配置</p>
+<h2 id="补充说明">补充说明</h2>
+<p><strong>iptables-restore命令</strong>
+用来还原iptables-save命令所备份的iptables配置。</p>
+<h3 id="语法">语法</h3>
+<pre class="shell"><code>iptables-restore(选项)</code></pre>
+<h3 id="选项">选项</h3>
+<pre class="shell"><code>-c：指定在还原iptables表时候，还原当前的数据包计数器和字节计数器的值；
+-t：指定要还原表的名称。</code></pre>
+<h3 id="实例">实例</h3>
+<pre class="shell"><code>iptables-restore &lt; iptables.bak</code></pre>
+<p>iptables.bak是iptables-save命令所备份的文件。</p>
+</div>
+</body>
+</html>

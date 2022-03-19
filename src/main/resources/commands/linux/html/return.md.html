@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>return.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="return">return</h1>
+<p>从函数中退出并返回数值。</p>
+<h2 id="概要">概要</h2>
+<pre class="shell"><code>return [n]</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li>使得shell函数退出并返回数值，如果没有指定n的值，则默认为函数最后一条命令执行的返回状态。</li>
+</ul>
+<h2 id="参数">参数</h2>
+<p>n（可选）：整数。</p>
+<h2 id="返回值">返回值</h2>
+<p>返回值为你指定的参数n的值，如果你指定的参数大于255或小于0，那么会通过加或减256的方式使得返回值总是处于0到255之间。</p>
+<p>在函数外执行return语句会返回失败。</p>
+<h2 id="例子">例子</h2>
+<pre class="shell"><code>#!/usr/bin/env bash
+# 定义一个返回值大于255的函数
+example() {
+  return 259
+}
+# 执行函数
+example
+# 显示3
+echo $?</code></pre>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+</div>
+</body>
+</html>

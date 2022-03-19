@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>unrar.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="unrar">unrar</h1>
+<p>解压rar文件命令，从 rar 压缩包中提取文件</p>
+<h3 id="语法">语法</h3>
+<pre class="shell"><code>unrar [选项][switch 命令] [文件名...][路径]
+unrar &lt;command&gt; [-&lt;switch 1&gt; -&lt;switch N&gt;] archive [files...] [path...]</code></pre>
+<h3 id="安装">安装</h3>
+<p>在 Linux 中输入以下命令下载安装包</p>
+<pre class="shell"><code>wget https://www.rarlab.com/rar/rarlinux-6.0.2.tar.gz
+
+cd ~/Downloads/
+tar -zxvf rarlinux-6.0.2.tar.gz</code></pre>
+<h3 id="选项">选项</h3>
+<pre class="shell"><code>e             # 解压压缩文件到当前目录
+l[t,b]        # 列出压缩文件[技术信息,简洁]
+p             # 将文件打印到标准输出。
+t             # 测试压缩文件
+v[t,b]        # 详细列出压缩文件[技术信息,简洁]
+x             # 用绝对路径解压文件</code></pre>
+<h3 id="switches-开关设置">SWITCHES 开关设置</h3>
+<p>注意：每个开关必须用空格分隔。你不能把它们放在一起。</p>
+<pre class="shell"><code>-av-       # 禁用，真实性验证检查。
+-c-        # 禁用，评论显示
+-f         # 刷新文件
+-kb        # 保留破碎的提取文件
+-ierr      # 将所有消息发送给stderr。
+-inul      # 禁用，所有消息。
+-o+        # 覆盖现有文件。
+-o-        # 不要覆盖现有文件
+-p&lt;password&gt;
+            # 设置密码。
+-p-        # 不查询密码
+-r         # 递归子目录。
+-u         # 更新文件。
+-v         # 列出所有卷。
+-x&lt;file&gt;
+            # 排除指定的文件。
+-x@&lt;list&gt;
+            # 排除指定列表文件中的文件。
+-x@        # 读取要从 stdin 中排除的文件名。
+-y         # 对所有查询都假设为是。</code></pre>
+<h3 id="参数">参数</h3>
+<p>目录：指定要显示列表的目录，也可以是具体的文件。</p>
+<h3 id="实例">实例</h3>
+<p>将压缩文件 <code>text.rar</code>
+在当前目录下解压缩,并解压完整路径。</p>
+<pre class="shell"><code>unrar x test.rar</code></pre>
+<p>将压缩文件 text.rar 在当前目录下解压缩,并解压完整路径：</p>
+<pre class="shell"><code>[root@linux ~]# unrar x test.rar</code></pre>
+<p>查看rar包中的内容：</p>
+<pre class="shell"><code>[root@linux ~]# unrar l test.rar</code></pre>
+<p>测试rar包是否能解压成功：</p>
+<pre class="shell"><code>[root@linux ~]# unrar t test.rar</code></pre>
+<p>解压到当前文件夹：</p>
+<pre class="shell"><code>[root@linux ~]# unrar e test.rar</code></pre>
+</div>
+</body>
+</html>

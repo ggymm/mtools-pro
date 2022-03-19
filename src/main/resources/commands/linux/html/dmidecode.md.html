@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>dmidecode.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="dmidecode">dmidecode</h1>
+<p>在Linux系统下获取有关硬件方面的信息</p>
+<h2 id="补充说明">补充说明</h2>
+<p><strong>dmidecode命令</strong>
+可以让你在Linux系统下获取有关硬件方面的信息。dmidecode的作用是将DMI数据库中的信息解码，以可读的文本方式显示。由于DMI信息可以人为修改，因此里面的信息不一定是系统准确的信息。dmidecode遵循SMBIOS/DMI标准，其输出的信息包括BIOS、系统、主板、处理器、内存、缓存等等。</p>
+<p>DMI（Desktop Management
+Interface,DMI）就是帮助收集电脑系统信息的管理系统，DMI信息的收集必须在严格遵照SMBIOS规范的前提下进行。SMBIOS（System
+Management
+BIOS）是主板或系统制造者以标准格式显示产品管理信息所需遵循的统一规范。SMBIOS和DMI是由行业指导机构Desktop
+Management Task
+Force(DMTF)起草的开放性的技术标准，其中DMI设计适用于任何的平台和操作系统。</p>
+<p>DMI充当了管理工具和系统层之间接口的角色。它建立了标准的可管理系统更加方便了电脑厂商和用户对系统的了解。DMI的主要组成部分是Management
+Information
+Format(MIF)数据库。这个数据库包括了所有有关电脑系统和配件的信息。通过DMI，用户可以获取序列号、电脑厂商、串口信息以及其它系统配件信息。</p>
+<h3 id="语法">语法</h3>
+<pre class="shell"><code>dmidecode [选项]</code></pre>
+<h3 id="选项">选项</h3>
+<pre class="shell"><code>-d：(default:/dev/mem)从设备文件读取信息，输出内容与不加参数标准输出相同。
+-h：显示帮助信息。
+-s：只显示指定DMI字符串的信息。(string)
+-t：只显示指定条目的信息。(type)
+-u：显示未解码的原始条目内容。
+--dump-bin file：将DMI数据转储到一个二进制文件中。
+--from-dump FILE：从一个二进制文件读取DMI数据。
+-V：显示版本信息。</code></pre>
+<p><strong>dmidecode参数string及type列表：</strong></p>
+<p>（1）Valid string keywords are：</p>
+<ul>
+<li>bios-vendor</li>
+<li>bios-version</li>
+<li>bios-release-date</li>
+<li>system-manufacturer</li>
+<li>system-product-name</li>
+<li>system-version</li>
+<li>system-serial-number</li>
+<li>system-uuid</li>
+<li>baseboard-manufacturer</li>
+<li>baseboard-product-name</li>
+<li>baseboard-version</li>
+<li>baseboard-serial-number</li>
+<li>baseboard-asset-tag</li>
+<li>chassis-manufacturer</li>
+<li>chassis-type</li>
+<li>chassis-version</li>
+<li>chassis-serial-number</li>
+<li>chassis-asset-tag</li>
+<li>processor-family</li>
+<li>processor-manufacturer</li>
+<li>processor-version</li>
+<li>processor-frequency</li>
+</ul>
+<p>（2）Valid type keywords are：</p>
+<ul>
+<li>bios</li>
+<li>system</li>
+<li>baseboard</li>
+<li>chassis</li>
+<li>processor</li>
+<li>memory</li>
+<li>Cache</li>
+<li>connector</li>
+<li>slot</li>
+</ul>
+<p>（3）type全部编码列表：</p>
+<ul>
+<li>BIOS</li>
+<li>System</li>
+<li>Base Board</li>
+<li>Chassis</li>
+<li>Processor</li>
+<li>Memory Controller</li>
+<li>Memory Module</li>
+<li>Cache</li>
+<li>Port Connector</li>
+<li>System Slots</li>
+<li>On Board Devices</li>
+<li>OEM Strings</li>
+<li>System Configuration Options</li>
+<li>BIOS Language</li>
+<li>Group Associations</li>
+<li>System Event Log</li>
+<li>Physical Memory Array</li>
+<li>Memory Device</li>
+<li>32-bit Memory Error</li>
+<li>Memory Array Mapped Address</li>
+<li>Memory Device Mapped Address</li>
+<li>Built-in Pointing Device</li>
+<li>Portable Battery</li>
+<li>System Reset</li>
+<li>Hardware Security</li>
+<li>System Power Controls</li>
+<li>Voltage Probe</li>
+<li>Cooling Device</li>
+<li>Temperature Probe</li>
+<li>Electrical Current Probe</li>
+<li>Out-of-band Remote Access</li>
+<li>Boot Integrity Services</li>
+<li>System Boot</li>
+<li>64-bit Memory Error</li>
+<li>Management Device</li>
+<li>Management Device Component</li>
+<li>Management Device Threshold Data</li>
+<li>Memory Channel</li>
+<li>IPMI Device</li>
+<li>Power Supply</li>
+<li>Additional Information</li>
+<li>Onboard Device</li>
+</ul>
+<h3 id="实例">实例</h3>
+<pre class="shell"><code>dmidecode -t 1  # 查看服务器信息
+dmidecode | grep &#39;Product Name&#39; # 查看服务器型号 
+dmidecode |grep &#39;Serial Number&#39; # 查看主板的序列号 
+dmidecode -t 2  # 查看主板信息
+dmidecode -s system-serial-number # 查看系统序列号 
+dmidecode -t memory # 查看内存信息 
+dmidecode -t 11 # 查看OEM信息 
+dmidecode -t 17 # 查看内存条数
+dmidecode -t 16 # 查询内存信息
+dmidecode -t 4  # 查看CPU信息
+
+cat /proc/scsi/scsi # 查看服务器硬盘信息</code></pre>
+<p>不带选项执行dmidecode命令通常会输出所有的硬件信息。dmidecode命令有个很有用的选项-t，可以按指定类型输出相关信息，假如要获得处理器方面的信息，则可以执行：</p>
+<pre class="shell"><code>[root@localhost ~]# dmidecode -t processor
+# dmidecode 2.11
+SMBIOS 2.5 present.
+
+Handle 0x0001, DMI type 4, 40 bytes
+Processor Information
+        Socket Designation: Node 1 Socket 1
+        Type: Central Processor
+        Family: Xeon MP
+        Manufacturer: Intel(R) Corporation
+        id: C2 06 02 00 FF FB EB BF
+        Signature: Type 0, Family 6, Model 44, Stepping 2
+        Flags:
+                FPU (Floating-point unit on-chip)
+                VME (Virtual mode extension)
+                DE (Debugging extension)
+                PSE (Page size extension)
+                TSC (time stamp counter)
+                MSR (Model specific registers)
+                PAE (Physical address extension)
+                MCE (Machine check exception)
+                CX8 (CMPXCHG8 instruction supported)
+                APIC (On-chip APIC hardware supported)
+                SEP (Fast system call)
+                MTRR (Memory type range registers)
+                PGE (Page global enable)
+                MCA (Machine check architecture)
+                CMOV (Conditional move instruction supported)
+                PAT (Page attribute table)
+                PSE-36 (36-bit page size extension)
+                CLFSH (CLFLUSH instruction supported)
+                DS (Debug store)
+                ACPI (ACPI supported)
+                MMX (MMX technology supported)
+                FXSR (FXSAVE and FXSTOR instructions supported)
+                SSE (Streaming SIMD extensions)
+                SSE2 (Streaming SIMD extensions 2)
+                ss (Self-snoop)
+                HTT (Multi-threading)
+                TM (Thermal monitor supported)
+                PBE (Pending break enabled)
+        Version: Intel(R) Xeon(R) CPU           E5620  @ 2.40GHz
+        Voltage: 1.2 V
+        External Clock: 5866 MHz
+        Max Speed: 4400 MHz
+        Current Speed: 2400 MHz
+        Status: Populated, Enabled
+        Upgrade: ZIF Socket
+        L1 Cache Handle: 0x0002
+        L2 Cache Handle: 0x0003
+        L3 Cache Handle: 0x0004
+        Serial Number: Not Specified
+        Asset Tag: Not Specified
+        Part Number: Not Specified
+        Core Count: 4
+        Core Enabled: 4
+        Thread Count: 8
+        Characteristics:
+                64-bit capable
+
+Handle 0x0055, DMI type 4, 40 bytes
+Processor Information
+        Socket Designation: Node 1 Socket 2
+        Type: Central Processor
+        Family: Xeon MP
+        Manufacturer: Not Specified
+        ID: 00 00 00 00 00 00 00 00
+        Signature: Type 0, Family 0, Model 0, Stepping 0
+        Flags: None
+        Version: Not Specified
+        Voltage: 1.2 V
+        External Clock: 5866 MHz
+        Max Speed: 4400 MHz
+        Current Speed: Unknown
+        Status: Unpopulated
+        Upgrade: ZIF Socket
+        L1 Cache Handle: Not Provided
+        L2 Cache Handle: Not Provided
+        L3 Cache Handle: Not Provided
+        Serial Number: Not Specified
+        Asset Tag: Not Specified
+        Part Number: Not Specified
+        Characteristics: None</code></pre>
+<p>查看内存的插槽数，已经使用多少插槽。每条内存多大，已使用内存多大</p>
+<pre class="shell"><code>dmidecode|grep -P -A5 &quot;Memory\s+Device&quot;|grep Size|grep -v Range 
+
+#   Size: 2048 MB
+#   Size: 2048 MB
+#   Size: 4096 MB
+#   Size: No Module Installed</code></pre>
+<p>查看内存支持的最大内存容量</p>
+<pre class="shell"><code>dmidecode|grep -P &#39;Maximum\s+Capacity&#39;
+
+#  Maximum Capacity: 16 GB</code></pre>
+<p>查看内存的频率</p>
+<p>```shell dmidecode|grep -A16 “Memory Device”</p>
+<h1 id="memory-device">Memory Device</h1>
+<h1 id="array-handle-0x1000">Array Handle: 0x1000</h1>
+<h1 id="error-information-handle-not-provided">Error Information Handle:
+Not Provided</h1>
+<h1 id="total-width-72-bits">Total Width: 72 bits</h1>
+<h1 id="data-width-64-bits">Data Width: 64 bits</h1>
+<h1 id="size-2048-mb">Size: 2048 MB</h1>
+<h1 id="form-factor-dimm">Form Factor: DIMM</h1>
+<h1 id="set-1">Set: 1</h1>
+<h1 id="locator-dimm_a1">Locator: DIMM_A1</h1>
+<h1 id="bank-locator-not-specified">Bank Locator: Not Specified</h1>
+<h1 id="type-ddr3">Type: DDR3</h1>
+<h1 id="type-detail-synchronous-unbuffered-unregistered">Type Detail:
+Synchronous Unbuffered (Unregistered)</h1>
+<h1 id="speed-1333-mhz">Speed: 1333 MHz</h1>
+<h1 id="manufacturer-00ce000080ce">Manufacturer: 00CE000080CE</h1>
+<h1 id="serial-number-4830f3e1">Serial Number: 4830F3E1</h1>
+<h1 id="asset-tag-01093200">Asset Tag: 01093200</h1>
+<h1 id="part-number-m391b5673eh1-ch9">Part Number: M391B5673EH1-CH9</h1>
+<h1 id="section">–</h1>
+<h1 id="memory-device-1">Memory Device</h1>
+<h1 id="array-handle-0x1000-1">Array Handle: 0x1000</h1>
+<h1 id="error-information-handle-not-provided-1">Error Information
+Handle: Not Provided</h1>
+<h1 id="total-width-72-bits-1">Total Width: 72 bits</h1>
+<h1 id="data-width-64-bits-1">Data Width: 64 bits</h1>
+<h1 id="size-2048-mb-1">Size: 2048 MB</h1>
+<h1 id="form-factor-dimm-1">Form Factor: DIMM</h1>
+<h1 id="set-1-1">Set: 1</h1>
+<h1 id="locator-dimm_a2">Locator: DIMM_A2</h1>
+<h1 id="bank-locator-not-specified-1">Bank Locator: Not Specified</h1>
+<h1 id="type-ddr3-1">Type: DDR3</h1>
+<h1 id="type-detail-synchronous-unbuffered-unregistered-1">Type Detail:
+Synchronous Unbuffered (Unregistered)</h1>
+<h1 id="speed-1333-mhz-1">Speed: 1333 MHz</h1>
+<h1 id="manufacturer-00ad000080ad">Manufacturer: 00AD000080AD</h1>
+<h1 id="serial-number-1ba1f0b5">Serial Number: 1BA1F0B5</h1>
+<h1 id="asset-tag-01110900">Asset Tag: 01110900</h1>
+<h1 id="part-number-hmt325u7bfr8c-h9">Part Number: HMT325U7BFR8C-H9</h1>
+<h1 id="section-1">–</h1>
+<p>dmidecode|grep -A16 “Memory Device”|grep ‘Speed’</p>
+<h1 id="speed-1333-mhz-2">Speed: 1333 MHz</h1>
+<h1 id="speed-1333-mhz-3">Speed: 1333 MHz</h1>
+<h1 id="speed-1333-mhz-4">Speed: 1333 MHz</h1>
+<h1 id="speed-unknown">Speed: Unknown</h1>
+<p>```shell</p>
+</div>
+</body>
+</html>

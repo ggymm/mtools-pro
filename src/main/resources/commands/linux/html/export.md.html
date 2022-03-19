@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>export.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="export">export</h1>
+<p>为shell变量或函数设置导出属性。</p>
+<h2 id="概要">概要</h2>
+<pre><code>export [-fn] [name[=word]]...
+export -p</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li>定义一到多个变量并设置导出属性。</li>
+<li>修改一到多个变量的值并设置导出属性。</li>
+<li>删除一到多个变量的导出属性。</li>
+<li>显示全部拥有导出属性的变量。</li>
+<li>为一到多个已定义函数新增导出属性。</li>
+<li>删除一到多个函数的导出属性。</li>
+<li>显示全部拥有导出属性的函数。</li>
+</ul>
+<h2 id="选项">选项</h2>
+<pre class="shell"><code>-f：指向函数。
+-n：删除变量的导出属性。
+-p：显示全部拥有导出属性的变量。
+-pf：显示全部拥有导出属性的函数。
+-nf：删除函数的导出属性。
+--：在它之后的选项无效。</code></pre>
+<h2 id="参数">参数</h2>
+<p>name（可选）：变量名或已定义函数名。</p>
+<p>value（可选）：变量的值。</p>
+<h3 id="返回值">返回值</h3>
+<p>export返回true除非你提供了非法选项或非法名称。</p>
+<h2 id="例子">例子</h2>
+<pre class="shell"><code># 显示全部拥有导出属性的变量。
+# export -p
+# export
+# 显示全部拥有导出属性的函数。
+# export -pf</code></pre>
+<pre class="shell"><code># 首先删除要演示的变量名
+#unset a b
+# 定义变量的同时增加导出属性
+export a b=3
+# 当然也可以先定义后增加导出属性
+b=3
+export b
+
+# 修改拥有导出属性的变量的值
+export a=5 b=7
+# 当然也可以直接赋值修改
+a=5;b=7
+
+# 删除变量的导出属性
+export -n a b</code></pre>
+<pre class="shell"><code># 首先删除要演示的函数名
+unset func_1 func_2
+# 创建函数
+function func_1(){ echo &#39;123&#39;; }
+function func_2(){ echo &#39;890&#39;; }
+
+# 为已定义函数增加导出属性
+export -f func_1 func_2
+
+# 删除函数的导出属性
+export -fn a b</code></pre>
+<pre class="shell"><code># 添加环境变量（JAVA）到`~/.bashrc`
+PATH=/usr/local/jdk1.7.0/bin:$PATH
+# 添加当前位置到动态库环境变量
+export LD_LIBRARY_PATH=$(pwd):${LD_LIBRARY_PATH}</code></pre>
+<h2 id="错误用法">错误用法</h2>
+<ul>
+<li>对未定义的函数添加导出属性。</li>
+<li>对没有导出属性的函数/变量执行删除导出属性操作。</li>
+<li>在 <code>--</code> 后使用选项。</li>
+</ul>
+<h2 id="qa">Q&amp;A</h2>
+<h4
+id="q对变量或函数设置导出属性有什么用">Q：对变量或函数设置导出属性有什么用？</h4>
+<p>A：它们会成为环境变量，可以在脚本中访问它们，尤其是脚本中调用的子进程需要时。（
+<strong><a
+href="https://askubuntu.com/questions/26318/environment-variable-vs-shell-variable-whats-the-difference">参考链接4</a></strong>
+）</p>
+<h4
+id="q如果我编写的脚本修改了已有的环境变量的值那么执行它会在当前终端生效吗会影响之前以及之后打开的终端吗">Q：如果我编写的脚本修改了已有的环境变量的值，那么执行它会在当前终端生效吗？会影响之前以及之后打开的终端吗？</h4>
+<p>A：只有通过<code>source</code>方式调用的脚本会生效，您可以查看<code>source</code>命令获得更多信息；其他方式只是在子shell中执行。
+之前的不会影响，之后的除非是修改了<code>~/.bashrc</code>这种启动终端时加载的脚本。（
+<strong><a
+href="https://www.cnblogs.com/hongzg1982/articles/2101792.html">参考链接1</a></strong>
+）</p>
+<h4
+id="q我脚本文件中调用.bashrc中定义的函数和变量为什么在新打开的终端中通过-sh-方式调用该脚本或直接运行">Q：我脚本文件中调用<code>~/.bashrc</code>中定义的函数和变量。为什么在新打开的终端中通过
+<code>sh</code> 方式调用该脚本或直接运行</h4>
+<p>这个当前用户有执行权限的脚本却不能使用这些函数和变量？<br />
+A：请在<code>~/.bashrc</code>文件中增加export它们的语句。另请参阅
+<strong>知识点</strong> 段落。</p>
+<h4
+id="q数组和关联数组也可以设置导出属性吗">Q：数组和关联数组也可以设置导出属性吗？</h4>
+<p>A：是可以的（如果你的bash支持它们），不过有些问题（ <strong><a
+href="https://stackoverflow.com/questions/5564418/exporting-an-array-in-bash-script">参考链接2</a></strong>
+）。</p>
+<h4
+id="q为什么我在查看变量或函数导出属性的时候显示的开头是declare">Q：为什么我在查看变量或函数导出属性的时候显示的开头是<code>declare</code>？</h4>
+<p>A：因为<code>declare</code>也能够设置变量或函数的导出属性，详见<code>declare</code>命令。</p>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<h3 id="知识点">知识点</h3>
+<p>在<code>info bash</code>或 <a
+href="http://www.gnu.org/software/bash/manual/bash.html">bash在线文档</a>
+的
+<code>3.7.3</code>节提到了shell执行环境，其中涉及变量和函数的内容如下</p>
+<blockquote>
+<ul>
+<li>shell parameters that are set by variable assignment or with set or
+inherited from the shell’s parent in the environment</li>
+<li>shell functions defined during execution or inherited from the
+shell’s parent in the environment</li>
+</ul>
+</blockquote>
+<p>那么第一句话中的参数又和变量有什么关系呢？在<code>3.4</code>节第一段中提到：</p>
+<blockquote>
+<p>A variable is a parameter denoted by a name.</p>
+</blockquote>
+<p>变量是有名字的参数。</p>
+<p>那么子shell确实继承了父shell中带有导出属性的变量或函数。</p>
+<p>可参考链接： <a
+href="https://blog.csdn.net/soaringlee_fighting/article/details/78759448">执行脚本方式的区别</a></p>
+<h3 id="参考链接">参考链接</h3>
+<ol type="1">
+<li><a
+href="https://www.cnblogs.com/hongzg1982/articles/2101792.html">关于bashrc
+profile文件的讨论</a></li>
+<li><a
+href="https://stackoverflow.com/questions/5564418/exporting-an-array-in-bash-script">关于export数组的讨论</a></li>
+<li><a
+href="https://unix.stackexchange.com/questions/22796/can-i-export-functions-in-bash">export
+-pf用法</a></li>
+<li><a
+href="https://askubuntu.com/questions/26318/environment-variable-vs-shell-variable-whats-the-difference">环境变量和shell变量的区别</a></li>
+</ol>
+<h3 id="扩展阅读">扩展阅读</h3>
+<p>一般来说，配置交叉编译工具链的时候需要指定编译工具的路径，此时就需要设置环境变量。查看已经存在的环境变量：</p>
+<pre class="shell"><code>[root@localhost ~]# export
+declare -x G_BROKEN_FILENAMES=&quot;1&quot;
+declare -x HISTSIZE=&quot;1000&quot;
+declare -x HOME=&quot;/root&quot;
+declare -x hostname=&quot;localhost&quot;
+declare -x INPUTRC=&quot;/etc/inputrc&quot;
+declare -x LANG=&quot;zh_CN.UTF-8&quot;
+declare -x LESSOPEN=&quot;|/usr/bin/lesspipe.sh %s&quot;
+declare -x logname=&quot;root&quot;
+declare -x LS_COLORS=&quot;no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:*.sh=01;32:*.csh=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.xbm=01;35:*.xpm=01;35:*.png=01;35:*.tif=01;35:&quot;
+declare -x mail=&quot;/var/spool/mail/root&quot;
+declare -x OLDPWD
+declare -x PATH=&quot;/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin&quot;
+declare -x pwd=&quot;/root&quot;
+declare -x SHELL=&quot;/bin/bash&quot;
+declare -x SHLVL=&quot;1&quot;
+declare -x SSH_CLIENT=&quot;192.168.2.111 2705 22&quot;
+declare -x SSH_CONNECTION=&quot;192.168.2.111 2705 192.168.2.2 22&quot;
+declare -x SSH_TTY=&quot;/dev/pts/0&quot;
+declare -x TERM=&quot;linux&quot;
+declare -x USER=&quot;root&quot;</code></pre>
+</div>
+</body>
+</html>

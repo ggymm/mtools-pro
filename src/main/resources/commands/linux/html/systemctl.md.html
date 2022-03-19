@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>systemctl.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="systemctl">systemctl</h1>
+<p>系统服务管理器指令</p>
+<h2 id="补充说明">补充说明</h2>
+<p><strong>systemctl命令</strong> 是系统服务管理器指令，它实际上将
+service 和 chkconfig 这两个命令组合到一起。</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>任务</th>
+<th>旧指令</th>
+<th>新指令</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>使某服务自动启动</td>
+<td>chkconfig –level 3 httpd on</td>
+<td>systemctl enable httpd.service</td>
+</tr>
+<tr class="even">
+<td>使某服务不自动启动</td>
+<td>chkconfig –level 3 httpd off</td>
+<td>systemctl disable httpd.service</td>
+</tr>
+<tr class="odd">
+<td>检查服务状态</td>
+<td>service httpd status</td>
+<td>systemctl status httpd.service （服务详细信息） systemctl is-active
+httpd.service （仅显示是否 Active)</td>
+</tr>
+<tr class="even">
+<td>显示所有已启动的服务</td>
+<td>chkconfig –list</td>
+<td>systemctl list-units –type=service</td>
+</tr>
+<tr class="odd">
+<td>启动服务</td>
+<td>service httpd start</td>
+<td>systemctl start httpd.service</td>
+</tr>
+<tr class="even">
+<td>停止服务</td>
+<td>service httpd stop</td>
+<td>systemctl stop httpd.service</td>
+</tr>
+<tr class="odd">
+<td>重启服务</td>
+<td>service httpd restart</td>
+<td>systemctl restart httpd.service</td>
+</tr>
+<tr class="even">
+<td>重载服务</td>
+<td>service httpd reload</td>
+<td>systemctl reload httpd.service</td>
+</tr>
+</tbody>
+</table>
+<h3 id="实例">实例</h3>
+<pre class="shell"><code>systemctl start nfs-server.service . # 启动nfs服务
+systemctl enable nfs-server.service # 设置开机自启动
+systemctl disable nfs-server.service # 停止开机自启动
+systemctl status nfs-server.service # 查看服务当前状态
+systemctl restart nfs-server.service # 重新启动某服务
+systemctl list-units --type=service # 查看所有已启动的服务</code></pre>
+<p>开启防火墙22端口</p>
+<pre class="shell"><code>iptables -I INPUT -p tcp --dport 22 -j accept</code></pre>
+<p>如果仍然有问题，就可能是SELinux导致的</p>
+<p>关闭SElinux：</p>
+<p>修改<code>/etc/selinux/config</code>文件中的<code>SELINUX=""</code>为disabled，然后重启。</p>
+<p>彻底关闭防火墙：</p>
+<pre class="shell"><code>sudo systemctl status firewalld.service
+sudo systemctl stop firewalld.service          
+sudo systemctl disable firewalld.service</code></pre>
+</div>
+</body>
+</html>

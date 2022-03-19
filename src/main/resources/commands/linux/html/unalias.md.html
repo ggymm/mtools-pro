@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>unalias.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="unalias">unalias</h1>
+<p>删除由alias设置的别名</p>
+<h2 id="概要">概要</h2>
+<pre class="shell"><code>unalias [-a] name [name ...]</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li>删除一个或多个别名。</li>
+<li>删除全部已定义的别名。</li>
+</ul>
+<h2 id="选项">选项</h2>
+<pre class="shell"><code>-a：删除全部已定义的别名。</code></pre>
+<h2 id="参数">参数</h2>
+<p>name：指定要删除的一个或多个已定义的别名。</p>
+<h3 id="返回值">返回值</h3>
+<p>unalias返回true除非您要删除的别名未定义。</p>
+<h2 id="例子">例子</h2>
+<pre class="shell"><code># 删除全部已定义的别名
+unalias -a
+
+# 删除已定义的别名（假设当前环境存在以下别名）
+unalias vi
+unalias ls grep</code></pre>
+<h2 id="错误用法">错误用法</h2>
+<ul>
+<li><p>要删除的别名未定义。</p></li>
+<li><p>不使用-a选项时没有传递name参数。</p></li>
+</ul>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li><strong>执行脚本时请注意：</strong></li>
+</ol>
+<blockquote>
+<p>使用<code>source</code>命令执行的bash脚本如果执行了<code>alias</code>或<code>unalias</code>命令，那么有可能会对终端环境的别名设置产生影响；终端环境的别名设置也可能改变运行结果；</p>
+<p>通过<code>sh</code>方式调用的bash脚本或直接运行当前用户有执行权限的脚本不受终端环境的别名影响。</p>
+</blockquote>
+<ol start="2" type="1">
+<li><p>查看及设置别名，请查看<code>alias</code>命令。</p></li>
+<li><p>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</p></li>
+</ol>
+</div>
+</body>
+</html>

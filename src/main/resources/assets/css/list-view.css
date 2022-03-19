@@ -3,8 +3,8 @@
     -fx-background-color: #ffffff;
     -fx-border-color: #e4e7ed;
     -fx-max-height: 274px;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
 }
 
 .list-view:focused {

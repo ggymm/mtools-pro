@@ -12,9 +12,9 @@
 
     -fx-padding: 4px 8px;
     -fx-font-size: 13px;
-    -fx-font-family: '.PingFang SC Regular';
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
+    -fx-font-family: 'Roboto';
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
 }
 
 .btn:focused, .btn:hover {

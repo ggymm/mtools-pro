@@ -5,7 +5,6 @@ import com.dlsc.workbenchfx.model.WorkbenchModule;
 import com.ggymm.mtools.modules.encode.controller.EncodeController;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -15,11 +14,8 @@ import java.io.IOException;
  */
 public class EncodeModule extends WorkbenchModule {
 
-    private final Stage stage;
-
-    public EncodeModule(Stage stage) {
-        super("编解码", new Image("assets/icon/encode.png"));
-        this.stage = stage;
+    public EncodeModule() {
+        super("编解码", new Image("assets/icon/icons8-product-management-50.png"));
     }
 
     @Override
@@ -35,7 +31,6 @@ public class EncodeModule extends WorkbenchModule {
     @Override
     public void init(Workbench workbench) {
         super.init(workbench);
-        System.out.println(stage);
     }
 
     @Override

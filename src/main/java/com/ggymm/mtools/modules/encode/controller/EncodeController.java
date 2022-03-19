@@ -36,7 +36,7 @@ public class EncodeController implements Initializable {
     private String currentCharType;
 
     public static Node getView() throws IOException {
-        final URL url = CoderController.class.getResource("/fxml/encode.fxml");
+        final URL url = EncodeController.class.getResource("/fxml/encode.fxml");
         final FXMLLoader loader = new FXMLLoader(url);
         return loader.load();
     }

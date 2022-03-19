@@ -1,7 +1,15 @@
+[#ftl]
+[#if useTableAsPackage]
 package ${basePackageName}.${packageName}.controller;
 
 import ${basePackageName}.${packageName}.entity.${className};
 import ${basePackageName}.${packageName}.service.${className}Service;
+[#else]
+package ${basePackageName}.controller;
+
+import ${basePackageName}.entity.${className};
+import ${basePackageName}.service.${className}Service;
+[/#if]
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

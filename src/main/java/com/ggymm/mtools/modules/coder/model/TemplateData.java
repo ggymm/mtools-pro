@@ -30,6 +30,10 @@ public class TemplateData {
     private String parentClass;
     private String parentClassName;
     @Setter
+    private Boolean useOrigin;
+    @Setter
+    private Boolean useTableAsPackage;
+    @Setter
     private String excludeColumn;
     private String[] excludeColumns;
     @Setter
@@ -38,11 +42,9 @@ public class TemplateData {
     private String autoFillColumn;
     private String[] autoFillColumns;
     @Setter
-    private Boolean tableLogic;
-    @Setter
-    private Boolean useOrigin;
-    @Setter
     private Boolean formatDate;
+    @Setter
+    private Boolean tableLogic;
 
     private String tableName;
     private List<TableField> fieldList;

@@ -61,21 +61,22 @@
                 <TextField fx:id="autoFillColumn" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                 <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <children>
-                        <CheckBox fx:id="isEntityOnly" mnemonicParsing="false" text="只生成实体类">
+                        <CheckBox fx:id="isUseParent" mnemonicParsing="false" text="实体类继承父类">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
                         </CheckBox>
-                        <CheckBox fx:id="isUseParent" mnemonicParsing="false" text="实体类继承父类">
-                     <HBox.margin>
-                        <Insets left="24.0" />
-                     </HBox.margin></CheckBox>
-                        <CheckBox fx:id="isColumnAutoFill" mnemonicParsing="false" text="插入/更新自动填充">
+                        <CheckBox fx:id="isEntityOnly" mnemonicParsing="false" text="只生成实体类">
                             <HBox.margin>
                                 <Insets left="24.0" />
                             </HBox.margin>
                         </CheckBox>
-                  <CheckBox fx:id="isColumnTableLogic" mnemonicParsing="false" text="添加逻辑删除">
+                        <CheckBox fx:id="isUseOriginColumn" mnemonicParsing="false" text="使用原始字段">
+                            <HBox.margin>
+                                <Insets left="24.0" />
+                            </HBox.margin>
+                        </CheckBox>
+                  <CheckBox fx:id="isUseTableAsPackage" mnemonicParsing="false" text="按表名划分包">
                      <HBox.margin>
                         <Insets left="24.0" />
                      </HBox.margin>
@@ -84,7 +85,7 @@
                 </HBox>
                 <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <children>
-                        <CheckBox fx:id="isUseOriginColumn" mnemonicParsing="false" text="使用原始字段">
+                        <CheckBox fx:id="isColumnAutoFill" mnemonicParsing="false" text="插入/更新自动填充">
                             <HBox.margin>
                                 <Insets />
                             </HBox.margin>
@@ -94,11 +95,7 @@
                                 <Insets left="24.0" />
                             </HBox.margin>
                         </CheckBox>
-                        <CheckBox fx:id="isGenFrontEnd" mnemonicParsing="false" text="生成前端代码">
-                     <HBox.margin>
-                        <Insets left="24.0" />
-                     </HBox.margin></CheckBox>
-                        <CheckBox fx:id="isUseCommentAsLabel" mnemonicParsing="false" text="使用字段注释做标签值">
+                        <CheckBox fx:id="isColumnTableLogic" mnemonicParsing="false" text="添加逻辑删除">
                             <HBox.margin>
                                 <Insets left="24.0" />
                             </HBox.margin>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>arch.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="arch">arch</h1>
+<p>显示当前主机的硬件架构类型</p>
+<h2 id="概要">概要</h2>
+<pre class="shell"><code>arch [OPTION]...</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li>打印机器架构信息；<code>arch</code>
+命令输出结果有：i386、i486、i586、alpha、sparc、arm、m68k、mips、ppc、i686等。</li>
+</ul>
+<h2 id="选项">选项</h2>
+<pre class="shell"><code>--help       显示帮助信息并退出。
+--version    显示版本信息并退出。</code></pre>
+<h2 id="例子">例子</h2>
+<pre class="shell"><code>[root@localhost ~]# arch
+x86_64</code></pre>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li><p>该命令等价于 <code>uname -m</code>。</p></li>
+<li><p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 arch</code>，<code>info coreutils 'arch invocation'</code>。</p></li>
+</ol>
+</div>
+</body>
+</html>

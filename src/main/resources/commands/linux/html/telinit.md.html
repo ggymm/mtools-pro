@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>telinit.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="telinit">telinit</h1>
+<p>切换当前正在运行系统的运行等级</p>
+<h2 id="补充说明">补充说明</h2>
+<p><strong>telinit命令</strong>
+用于切换当前正在运行的Linux系统的运行等级。</p>
+<p><em>RUNLEVEL</em> 参数应该是多用户运行级别 <code>2-5</code>
+之一，<code>0</code> 用于停止系统，<code>6</code> 用于重新启动系统，或
+<code>1</code> 用于使系统进入单用户模式。</p>
+<p>通常您会使用 <code>shutdown(8)</code>
+工具来停止或重新启动系统，或者将其降低到单用户模式。</p>
+<p><em>RUNLEVEL</em> 也可能是 S 或 s
+，这会将系统直接置于单用户模式，而无需先实际停止进程，您可能不希望这样。</p>
+<p>通过发出 <code>runlevel(7)</code> 事件来更改运行级别，该事件包括
+<em>RUNLEVEL</em> 环境变量中的新运行级别以及 PREVLEVEL
+变量中的先前运行级别（从环境或 <code>/var/run/utmp</code> 获得）。</p>
+<p><strong>telinit</strong> 会将新的运行级别写入
+<code>/var/run/utmp</code> 并将新条目附加到
+<code>/var/log/wtmp</code>。</p>
+<h3 id="语法">语法</h3>
+<pre class="shell"><code>telint(选项)(参数)
+telinit [OPTION]... RUNLEVEL</code></pre>
+<h3 id="选项">选项</h3>
+<pre class="shell"><code>-t：指定等待的秒数。
+-e 键=值</code></pre>
+<p>这指定了与 <em>RUNLEVEL</em> 和 <em>PREVLEVEL</em>
+一起包含在事件中的附加环境变量。</p>
+<h3 id="参数">参数</h3>
+<p>运行等级：指定要切换的运行等级。</p>
+<h3 id="environment">Environment</h3>
+<p>RUNLEVEL</p>
+<p>如果设置优先于从 <code>/var/run/utmp</code>
+读取，<code>telinit</code> 将从该环境变量读取当前运行级别</p>
+<h3 id="files">Files</h3>
+<ul>
+<li><code>/var/run/utmp</code> 将从哪里读取当前运行级别；
+此文件也将使用新的运行级别进行更新。</li>
+<li><code>/var/log/wtmp</code>
+新的运行级别记录将附加到此文件中以获取新的运行级别。</li>
+</ul>
+</div>
+</body>
+</html>

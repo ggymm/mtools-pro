@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>suspend.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="suspend">suspend</h1>
+<p>挂起shell的执行。</p>
+<h2 id="概要">概要</h2>
+<pre class="shell"><code>suspend [-f]</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li><p>挂起shell的执行，直到收到<code>SIGCONT</code>信号。</p></li>
+<li><p>除非使用<code>-f</code>选项，否则无法对<code>login shell</code>使用。</p></li>
+</ul>
+<h2 id="选项">选项</h2>
+<pre class="shell"><code>-f    对login shell执行挂起操作。</code></pre>
+<h2 id="返回值">返回值</h2>
+<p>返回成功除非未开启作业控制或发生了错误。</p>
+<h2 id="例子">例子</h2>
+<pre class="shell"><code># 打开一个终端，首先获取PID。
+echo $$
+# 执行挂起命令
+suspend</code></pre>
+<pre class="shell"><code># 再打开一个终端，发送SIGCONT命令
+kill -s SIGCONT PID
+# 此时之前的终端结束挂起状态，可以正常交互。</code></pre>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li><code>bash</code>的作业控制命令包括<code>bg fg kill wait disown suspend</code>。</li>
+<li>该命令需要<code>set</code>选项<code>monitor</code>处于开启状态时才能执行；查看作业控制状态：输入<code>set -o</code>查看<code>monitor</code>行；执行<code>set -o monitor</code>或<code>set -m</code>开启该选项。</li>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+</div>
+</body>
+</html>

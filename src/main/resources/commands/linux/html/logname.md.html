@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>logname.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="logname">logname</h1>
+<p>打印当前终端登录用户的名称。</p>
+<h2 id="概要">概要</h2>
+<pre class="shell"><code>logname [OPTION]...</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li>打印当前终端登录用户的名称。</li>
+</ul>
+<h2 id="选项">选项</h2>
+<pre class="shell"><code>--help       显示帮助信息并退出。
+--version    显示版本信息并退出。</code></pre>
+<h2 id="返回值">返回值</h2>
+<p>返回0表示成功，返回非0值表示失败。</p>
+<h2 id="例子">例子</h2>
+<pre class="shell"><code>[root@localhost ~]# logname
+root</code></pre>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li><p>注意区分 <code>whoami</code> 和 <code>logname</code>
+这两个命令；比如我们以用户 <code>root</code>
+打开的终端，然后切换到了用户 <code>user2</code>。此时，
+<code>whoami</code>返回的是当前用户 <code>user2</code>,
+<code>logname</code> 返回的是
+<code>root</code>，大家可以自行实践验证一下。</p></li>
+<li><p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 logname</code>，<code>info coreutils 'logname invocation'</code>。</p></li>
+</ol>
+</div>
+</body>
+</html>

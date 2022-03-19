@@ -12,8 +12,8 @@
 
     -fx-padding: 6px 8px;
     -fx-font-size: 13px;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
 }
 
 .text-area {
@@ -27,9 +27,9 @@
     -fx-background-color: #fff;
 
     -fx-padding: 6px 8px;
-    -fx-font-size: 14px;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
+    -fx-font-size: 13px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
 }
 
 .text-area .content {

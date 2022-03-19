@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>supervisord.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="supervisord">supervisord</h1>
+<p>配置后台服务/常驻进程的进程管家工具</p>
+<h2 id="安装">安装</h2>
+<pre class="shell"><code># 安装 supervisord
+apt-get install supervisor</code></pre>
+<h2 id="实例">实例</h2>
+<p>生成配置文件 <code>/etc/supervisord.conf</code></p>
+<pre class="shell"><code>[program:app]
+command=/usr/bin/gunicorn -w 1 wsgiapp:application
+directory=/srv/www
+user=www-data</code></pre>
+<p>supervisord: 启动 supervisor 服务</p>
+<pre class="shell"><code>supervisorctl start app
+supervisorctl stop app
+supervisorctl reload # 修改/添加配置文件需要执行这个</code></pre>
+<h2 id="下载地址">下载地址</h2>
+<p>https://pypi.python.org/pypi/meld3<br />
+https://pypi.python.org/pypi/supervisor</p>
+</div>
+</body>
+</html>

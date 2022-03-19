@@ -3,9 +3,11 @@ package com.ggymm.mtools;
 import com.dlsc.workbenchfx.Workbench;
 import com.ggymm.mtools.controller.CustomTab;
 import com.ggymm.mtools.modules.coder.CoderModule;
-import com.ggymm.mtools.modules.document.DocumentModule;
+import com.ggymm.mtools.modules.download.DownloadModule;
 import com.ggymm.mtools.modules.encode.EncodeModule;
+import com.ggymm.mtools.modules.linux.LinuxModule;
 import com.ggymm.mtools.modules.logcat.LogcatModule;
+import com.ggymm.mtools.modules.qrcode.QrCodeModule;
 import com.ggymm.mtools.utils.StyleUtils;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -26,7 +28,7 @@ public class MToolsApp extends Application {
 
     @Override
     public void start(Stage stage) {
-        final Scene scene = new Scene(initWorkbench(stage));
+        final Scene scene = new Scene(initWorkbench());
 
         stage.setTitle("工具箱");
         stage.setScene(scene);
@@ -41,14 +43,16 @@ public class MToolsApp extends Application {
         StyleUtils.initStyle(scene);
     }
 
-    private Workbench initWorkbench(Stage stage) {
+    private Workbench initWorkbench() {
         final MenuItem[] menuItems = initMenu();
 
         workbench = Workbench.builder(
-                        new CoderModule(stage),
-                        new DocumentModule(),
-                        new EncodeModule(stage),
-                        new LogcatModule()
+                        new CoderModule(),
+                        new DownloadModule(),
+                        new EncodeModule(),
+                        new LogcatModule(),
+                        new QrCodeModule(),
+                        new LinuxModule()
                 ).navigationDrawerItems(menuItems)
                 .tabFactory(CustomTab::new)
                 .build();

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>tty.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="tty">tty</h1>
+<p>显示连接到当前标准输入的终端设备文件名</p>
+<h2 id="概要">概要</h2>
+<pre class="shell"><code>tty [option] ...</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li>显示连接到当前标准输入的终端设备文件名，当标准输入不是终端时打印
+“not a tty”。</li>
+</ul>
+<h2 id="选项">选项</h2>
+<pre class="shell"><code>-s, --silent, --quiet    不打印任何信息，只返回退出状态。
+--help                   显示帮助信息并退出。
+--version                显示版本信息并退出。</code></pre>
+<h2 id="返回值">返回值</h2>
+<p>当使用 <code>-s, --silent, --quiet</code> 时，返回码为 0
+表示标准输入是终端，返回码为 1 表示标准输入不是终端，返回码为 2
+表示选项错误，返回码为 3 表示有写错误发生。</p>
+<h2 id="例子">例子</h2>
+<p>显示连接到当前标准输入的终端设备文件名。</p>
+<pre class="shell"><code>[root@localhost ~]# tty
+/dev/pts/2</code></pre>
+<p>查找终端关联的进程（假设是 pts/2）</p>
+<pre class="shell"><code># 注意是筛选 TTY 列。
+ps -ef | egrep &quot;pts/2 &quot; | grep -v grep</code></pre>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 tty</code>，<code>info coreutils 'tty invocation'</code>。</li>
+</ol>
+</div>
+</body>
+</html>

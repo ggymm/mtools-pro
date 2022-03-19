@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>exit.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="exit">exit</h1>
+<p>退出当前的shell。</p>
+<h2 id="概要">概要</h2>
+<pre class="shell"><code>exit [n]</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li>执行exit可使shell以指定的状态值退出。若不设置参数，则以最后一条命令的返回值作为exit的返回值退出。</li>
+</ul>
+<h2 id="参数">参数</h2>
+<p>n（可选）：指定的shell返回值（整数）。</p>
+<h2 id="返回值">返回值</h2>
+<p>返回值为你指定的参数n的值，如果你指定的参数大于255或小于0，那么会通过加或减256的方式使得返回值总是处于0到255之间。</p>
+<h2 id="例子">例子</h2>
+<p>退出当前shell：</p>
+<pre class="shell"><code>[root@localhost ~]# exit
+logout</code></pre>
+<p>也可以使用<code>ctrl+d</code>退出当前终端，下面列出了打开或关闭该功能的方法：</p>
+<pre class="shell"><code># 打开ctrl+d退出终端
+set -o ignoreeof
+# 关闭ctrl+d退出终端
+set +o ignoreeof</code></pre>
+<p>在脚本中，进入脚本所在目录，否则退出：</p>
+<pre class="shell"><code>cd $(dirname $0) || exit 1</code></pre>
+<p>在脚本中，判断参数数量，不匹配就打印使用方式，退出：</p>
+<pre class="shell"><code>if [ &quot;$#&quot; -ne &quot;2&quot; ]; then
+    echo &quot;usage: $0 &lt;area&gt; &lt;hours&gt;&quot;
+    exit 2
+fi</code></pre>
+<p>在脚本中，退出时删除临时文件：</p>
+<pre class="shell"><code>trap &quot;rm -f tmpfile; echo Bye.&quot; EXIT</code></pre>
+<p>检查上一命令的退出码：</p>
+<pre class="shell"><code>./mycommand.sh
+EXCODE=$?
+if [ &quot;$EXCODE&quot; == &quot;0&quot; ]; then
+    echo &quot;O.K&quot;
+fi</code></pre>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+</div>
+</body>
+</html>

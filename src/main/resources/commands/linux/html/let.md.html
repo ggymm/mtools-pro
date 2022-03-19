@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>let.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="let">let</h1>
+<p>简单的计算器，执行算术表达式。</p>
+<h2 id="概要">概要</h2>
+<pre class="shell"><code>let arg [arg ...]</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li>执行一个或多个算术表达式。</li>
+</ul>
+<h2 id="参数">参数</h2>
+<p>arg：算术表达式</p>
+<h2 id="返回值">返回值</h2>
+<p>当<code>let</code>最后一个执行的表达式的计算结果为0时返回<code>1</code>，否则返回<code>0</code>。
+当<code>let</code>执行的表达式的除数为0时，返回<code>1</code>并报错。</p>
+<h2 id="运算符优先级递减表">运算符优先级递减表</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>运算符</strong></th>
+<th style="text-align: center;"><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>id++, id--</code></td>
+<td style="text-align: center;"><code>变量后增量、变量后减量</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>++id, --id</code></td>
+<td style="text-align: center;"><code>变量预增量、变量预减量</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>-, +</code></td>
+<td style="text-align: center;"><code>正号、负号</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>!, ~</code></td>
+<td style="text-align: center;"><code>逻辑否、按位取反</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>**</code></td>
+<td style="text-align: center;"><code>幂运算</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>*, /, %</code></td>
+<td style="text-align: center;"><code>乘法、除法、取余</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>+, -</code></td>
+<td style="text-align: center;"><code>加法、减法</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>&lt;&lt;, &gt;&gt;</code></td>
+<td style="text-align: center;"><code>按位左移、右移</code></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: center;"><code>&lt;=, &gt;=, &lt;, &gt;</code></td>
+<td style="text-align: center;"><code>比较</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>==, !=</code></td>
+<td style="text-align: center;"><code>等于、不等于</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>&amp;</code></td>
+<td style="text-align: center;"><code>按位与</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>^</code></td>
+<td style="text-align: center;"><code>按位异或</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\|</code></td>
+<td style="text-align: center;"><code>按位或</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>&amp;&amp;</code></td>
+<td style="text-align: center;"><code>逻辑与</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\|\|</code></td>
+<td style="text-align: center;"><code>逻辑或</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>expr ? expr : expr</code></td>
+<td
+style="text-align: center;"><code>条件运算符（三元运算符）</code></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: center;"><code>=, *=, /=, %=, +=, -=,</code><br><code>&lt;&lt;=, &gt;&gt;=, &amp;=, ^=, \|=</code></td>
+<td style="text-align: center;"><code>赋值</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="例子">例子</h2>
+<pre class="shell"><code># 尝试直接在终端中执行算术表达式（就像在python的IDLE）。
+3+4
+bash：3+4：command not found...
+# 换一种方式。
+3 + 4
+bash：3：command not found...
+# 看来不行。</code></pre>
+<pre class="shell"><code># let命令赋值。
+let a=3**4
+echo ${a}
+# 显示81。
+# ((...))和let命令等效。
+((a=3**4))</code></pre>
+<pre class="shell"><code># let常用于变量赋值，而外部命令expr可直接返回表达式的值。
+let 3+4
+# 没有显示7。
+# 执行后显示7，注意空格。
+expr 3 + 4</code></pre>
+<pre class="shell"><code># 条件表达式。
+if ((8&gt;4)); then
+  echo &#39;8 is greater than 4.&#39;
+else
+  echo &#39;error&#39;
+fi
+# 注意空格。
+if [[ 12 -le 10 ]]; then
+  echo &#39;error&#39;
+else
+  echo &#39;12 is greater than 10.&#39;
+fi</code></pre>
+<pre class="shell"><code># 可以通过declare命令设置整型属性的方法来进行算术运算。
+# local命令与此类似。
+
+# 没有指定整型属性，输出为字符串&#39;a+b&#39;。
+declare a=3 b=4 c
+c=a+b
+echo ${c}
+# 不过可以使用以下方式赋值。
+c=$((a+b))
+echo ${c}
+# 显示7
+
+# 设置了整型属性就可以直接加了。
+declare -i a=3 b=4 c
+c=a+b
+echo ${c}
+# 同上。
+declare -i a
+a=2*3
+echo ${a}
+# 显示6。</code></pre>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li><p>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</p></li>
+<li><p>执行算术计算的命令除了<code>let</code>，还有外部命令<code>expr</code>、<code>bc</code>等。</p></li>
+</ol>
+</div>
+</body>
+</html>

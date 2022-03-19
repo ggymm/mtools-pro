@@ -11,7 +11,6 @@ public class StyleUtils {
     public static void initStyle(Scene scene) {
         // 设置自定义样式
         final String[] styles = new String[]{
-                "assets/css/font.css",
                 "assets/css/main.css",
 
                 "assets/css/button.css",
@@ -21,6 +20,7 @@ public class StyleUtils {
                 "assets/css/select.css",
                 "assets/css/option.css",
 
+                "assets/css/alert.css",
                 "assets/css/list-view.css",
 
                 "assets/css/cover.css",

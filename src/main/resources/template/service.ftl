@@ -1,10 +1,20 @@
+[#ftl]
+[#if useTableAsPackage]
 package ${basePackageName}.${packageName}.service;
+[#else]
+package ${basePackageName}.service;
+[/#if]
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+[#if useTableAsPackage]
 import ${basePackageName}.${packageName}.entity.${className};
 import ${basePackageName}.${packageName}.mapper.${className}Mapper;
+[#else]
+import ${basePackageName}.entity.${className};
+import ${basePackageName}.mapper.${className}Mapper;
+[/#if]
 import com.ninelock.core.response.ResultMsg;
 import com.ninelock.core.toolkit.QueryGenerator;
 import org.springframework.stereotype.Service;

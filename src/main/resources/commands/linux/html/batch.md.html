@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>batch.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="batch">batch</h1>
+<p>在系统不繁忙的时候执行定时任务</p>
+<h2 id="补充说明">补充说明</h2>
+<p><strong>batch命令</strong>
+用于在指定时间，当系统不繁忙时执行任务，用法与at相似。</p>
+<h3 id="语法">语法</h3>
+<pre class="shell"><code>batch(选项)(参数)</code></pre>
+<h3 id="选项">选项</h3>
+<pre class="shell"><code>-f：指定包含具体指令的任务文件；
+-q：指定新任务的队列名称；
+-m：任务执行完后向用户发送E-mail。</code></pre>
+<h3 id="参数">参数</h3>
+<p>日期时间：指定任务执行的日期时间。</p>
+<h3 id="实例">实例</h3>
+<pre class="shell"><code>batch 
+at&gt; echo 1234
+at&gt; &lt;EOT&gt;
+job 5 at Sun Apr 28 08:49:00 2013</code></pre>
+</div>
+</body>
+</html>

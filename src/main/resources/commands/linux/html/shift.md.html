@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>shift.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="shift">shift</h1>
+<p>移动位置参数。</p>
+<h2 id="概要">概要</h2>
+<pre class="shell"><code>shift [n]</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li>将位置参数<code>$n, $n+1...</code>重命名为<code>$1, $2...</code>。</li>
+</ul>
+<h2 id="参数">参数</h2>
+<p>n（可选）：大于等于1且小于等于参数个数的整数，默认为1。</p>
+<h2 id="返回值">返回值</h2>
+<p>返回成功除非n大于参数个数或n小于1以及其他非法值。</p>
+<h2 id="例子">例子</h2>
+<p>假设我们的脚本文件（test.sh）如下：</p>
+<pre class="shell"><code>#!/usr/bin/env bash
+# 显示前三个位置参数。
+echo &quot;$1 $2 $3&quot;
+# 移除前两个位置参数，并将$3重命名为$1，之后的以此类推。
+shift 2
+echo &quot;$1 $2 $3&quot;</code></pre>
+<p>在终端执行该脚本：</p>
+<pre class="shell"><code>sh test.sh q w e r t</code></pre>
+<p>返回信息如下：</p>
+<pre class="shell"><code>q w e
+e r t</code></pre>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+</div>
+</body>
+</html>

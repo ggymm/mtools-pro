@@ -11,6 +11,7 @@ import com.ggymm.mtools.utils.TemplateUtils;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -45,15 +46,14 @@ public class CoderController implements Initializable {
     public TextField outputPath;
     public Button choosePath;
 
-    public CheckBox isEntityOnly;
     public CheckBox isUseParent;
-    public CheckBox isColumnAutoFill;
-    public CheckBox isColumnTableLogic;
-
+    public CheckBox isEntityOnly;
     public CheckBox isUseOriginColumn;
+    public CheckBox isUseTableAsPackage;
+
+    public CheckBox isColumnAutoFill;
     public CheckBox isDateColumnFormat;
-    public CheckBox isGenFrontEnd;
-    public CheckBox isUseCommentAsLabel;
+    public CheckBox isColumnTableLogic;
 
     public TextField packageName;
     public TextField parentPackageName;
@@ -84,23 +84,28 @@ public class CoderController implements Initializable {
         this.renderDatabase();
 
         // 默认配置
-        this.isEntityOnly.setSelected(true);
         this.isUseParent.setSelected(false);
-        this.isColumnAutoFill.setSelected(true);
-        this.isColumnTableLogic.setSelected(true);
-
+        this.isEntityOnly.setSelected(true);
         this.isUseOriginColumn.setSelected(false);
+        this.isUseTableAsPackage.setSelected(false);
+
+        this.isColumnAutoFill.setSelected(true);
         this.isDateColumnFormat.setSelected(true);
-        this.isGenFrontEnd.setSelected(false);
-        this.isUseCommentAsLabel.setSelected(false);
+        this.isColumnTableLogic.setSelected(true);
 
         this.packageName.setText("com.ninelock.api");
         this.parentPackageName.setDisable(true);
+
+        // 不允许更改
         this.parentPackageName.setText("com.ninelock.core.base.BaseEntity");
         this.parentPackageName.setEditable(false);
+
+        // 不允许更改
         this.excludeColumn.setDisable(true);
         this.excludeColumn.setText("create_time;create_id;creator;update_time;update_id;del_flag");
         this.excludeColumn.setEditable(false);
+
+        // 不允许更改
         this.autoFillColumn.setText("create_time;create_id;creator;update_time;update_id;del_flag");
         this.autoFillColumn.setEditable(false);
     }
@@ -117,8 +122,11 @@ public class CoderController implements Initializable {
 
         // 刷新数据库列表
         this.refreshDatabaseList.setOnMouseClicked((event) -> {
-            this.databaseList.getItems().clear();
-            this.renderDatabase();
+            final ObservableList<String> items = this.databaseList.getItems();
+            if (items != null) {
+                items.clear();
+                this.renderDatabase();
+            }
         });
 
         // 选择数据库表
@@ -184,12 +192,14 @@ public class CoderController implements Initializable {
             templateList.add(new TemplateConfig("entity", ".java", "entity"));
 
             final TemplateData templateData = new TemplateData();
-            templateData.setUseParent(this.isUseParent.isSelected());
-            templateData.setAutoFill(this.isColumnAutoFill.isSelected());
-            templateData.setTableLogic(this.isColumnTableLogic.isSelected());
 
+            templateData.setUseParent(this.isUseParent.isSelected());
             templateData.setUseOrigin(this.isUseOriginColumn.isSelected());
+            templateData.setUseTableAsPackage(this.isUseTableAsPackage.isSelected());
+
+            templateData.setAutoFill(this.isColumnAutoFill.isSelected());
             templateData.setFormatDate(this.isDateColumnFormat.isSelected());
+            templateData.setTableLogic(this.isColumnTableLogic.isSelected());
 
             templateData.setBasePackageName(this.packageName.getText());
             templateData.setParentClass(this.parentPackageName.getText());
@@ -221,21 +231,20 @@ public class CoderController implements Initializable {
             for (String table : tableList) {
                 templateData.setTableName(table);
                 templateData.setFieldList(DatabaseUtils.tableFieldList(this.currentDatabase, table));
+
                 for (TemplateConfig config : templateList) {
                     // 写入文件路径
                     String filePath = outputPath;
-                    if (templateData.getUseOrigin()) {
-                        filePath += "/" +
-                                table + "/" +
-                                config.getPath() + "/" +
-                                table;
+                    if (templateData.getUseTableAsPackage()) {
+                        if (templateData.getUseOrigin()) {
+                            filePath += "/" + table + "/" + config.getPath() + "/";
+                        } else {
+                            filePath += "/" + LOWER_UNDERSCORE.to(LOWER_CAMEL, table) + "/" + config.getPath() + "/";
+                        }
                     } else {
-                        filePath += "/" +
-                                LOWER_UNDERSCORE.to(LOWER_CAMEL, table) + "/" +
-                                config.getPath() + "/" +
-                                LOWER_UNDERSCORE.to(UPPER_CAMEL, table);
+                        filePath += "/" + config.getPath() + "/";
                     }
-                    filePath += config.getSuffix();
+                    filePath += LOWER_UNDERSCORE.to(UPPER_CAMEL, table) + config.getSuffix();
 
                     final Template entity = TemplateUtils.getTemplate(config.getTemplateName());
                     if (entity != null) {
@@ -254,6 +263,14 @@ public class CoderController implements Initializable {
                     }
                 }
             }
+
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.getDialogPane().getStyleClass().add("alert-success");
+                alert.setTitle("成功");
+                alert.setHeaderText("代码生成完毕");
+                alert.showAndWait();
+            });
         }).start();
     }
 }

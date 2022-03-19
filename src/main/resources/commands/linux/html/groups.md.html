@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>groups.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="groups">groups</h1>
+<p>打印指定用户所在组的名称。</p>
+<h2 id="概要">概要</h2>
+<pre class="shell"><code>groups [OPTION]... [username]...</code></pre>
+<h2 id="主要用途">主要用途</h2>
+<ul>
+<li>打印指定用户所在组的名称。</li>
+</ul>
+<h2 id="选项">选项</h2>
+<pre class="shell"><code>--help       显示帮助信息并退出。
+--version    显示版本信息并退出。</code></pre>
+<h2 id="参数">参数</h2>
+<p>username（可选）：可以是一到多个，不提供时默认为当前用户。</p>
+<h2 id="返回值">返回值</h2>
+<p>返回0表示成功，返回非0值表示失败。</p>
+<h2 id="例子">例子</h2>
+<p>显示linux用户所属的组</p>
+<pre class="shell"><code>[root@localhost ~]# groups linux
+linux : linux adm dialout cdrom plugdev lpadmin admin sambashare</code></pre>
+<h3 id="注意">注意</h3>
+<ol type="1">
+<li>该命令等价于 <code>id -Gn</code>。</li>
+<li>每个用户属于<code>/etc/passwd</code>中指定的一个组和在<code>/etc/group</code>中指定的其他组。</li>
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 groups</code>，<code>info coreutils 'groups invocation'</code>。</li>
+</ol>
+</div>
+</body>
+</html>

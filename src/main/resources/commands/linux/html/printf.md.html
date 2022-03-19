@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>printf.md.html</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="wrapper">  
+<header>
+
+
+</header>
+
+
+
+<h1 id="printf">printf</h1>
+<p>格式化并输出结果。</p>
+<h2 id="目录">目录</h2>
+<ul>
+<li><a href="#内建命令">bash内建命令</a></li>
+<li><a href="#外部命令">GNU coreutils中的命令</a></li>
+</ul>
+<h2 id="内建命令">内建命令</h2>
+<h4 id="概要">概要</h4>
+<pre class="shell"><code>printf [-v var] format [arguments]</code></pre>
+<h4 id="主要用途">主要用途</h4>
+<ul>
+<li>格式化参数并输出。</li>
+</ul>
+<h4 id="选项">选项</h4>
+<pre class="shell"><code>-v var：将结果输出到变量var中而不是输出到标准输出。</code></pre>
+<h4 id="参数">参数</h4>
+<p>format：输出格式。</p>
+<p>arguments：一到多个参数。</p>
+<pre class="shell"><code>转义序列：除了支持printf(1)和printf(3)的转义序列，内建printf还支持以下转义序列：
+
+%b       展开参数中的反斜杠转义字符。
+%q       将参数扩起以用作shell输入。
+%(fmt)T  根据strftime(3)中的转义字符来输出日期时间字符串。</code></pre>
+<h4 id="返回值">返回值</h4>
+<p>返回状态为成功除非给出了非法选项、写错误、赋值错误。</p>
+<h4 id="例子">例子</h4>
+<pre class="shell"><code># %-5s 格式为左对齐且宽度为5的字符串代替（&#39;-&#39;表示左对齐），不使用则默认右对齐。
+# %-4.2f 格式为左对齐宽度为4，保留两位小数。
+
+printf &quot;%-5s %-10s %-4s\n&quot; NO Name Mark
+printf &quot;%-5s %-10s %-4.2f\n&quot; 01 Tom 90.3456
+printf &quot;%-5s %-10s %-4.2f\n&quot; 02 Jack 89.2345
+printf &quot;%-5s %-10s %-4.2f\n&quot; 03 Jeff 98.4323
+
+# 输出
+NO    Name       Mark
+01    Tom        90.35
+02    Jack       89.23
+03    Jeff       98.43
+
+
+# %b %q %(fmt)T 的例子。
+# see it again with a newline.
+printf &quot;%s\n&quot; &#39;hello world&#39;
+# 展开换行符，和上面的结果一样。
+printf &quot;%b&quot; &#39;hello world\n&#39;
+
+printf &#39;%q\n&#39; &#39;a b c&#39;
+# 输出
+a\ b\ c
+
+# %z为时区，%n为换行符。
+printf &quot;%(%F %T %z%n)T&quot;
+# 输出
+2019-09-10 01:48:07 +0000</code></pre>
+<h4 id="注意">注意</h4>
+<ol type="1">
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<h2 id="外部命令">外部命令</h2>
+<h4 id="概要-1">概要</h4>
+<pre class="shell"><code>printf FORMAT [ARGUMENT]...
+printf OPTION</code></pre>
+<h4 id="主要用途-1">主要用途</h4>
+<ul>
+<li>格式化参数并输出。</li>
+</ul>
+<h4 id="选项-1">选项</h4>
+<pre class="shell"><code>--help 显示帮助信息并退出。
+--version 显示版本信息并退出。</code></pre>
+<h4 id="参数-1">参数</h4>
+<p>format：输出格式。</p>
+<p>arguments：一到多个参数。</p>
+<pre class="shell"><code>在这里忽略了（%b %q），如果你安装的coreutils版本支持它们，那么请参考上面的例子。
+支持的转义序列：
+
+\&quot;          双引号
+\\          反斜杠
+\a          响铃
+\b          退格
+\c          截断输出
+\e          退出
+\f          翻页
+\n          换行
+\r          回车
+\t          水平制表符
+\v          竖直制表符
+\NNN        八进制数 (1到3位数字)
+\xHH        十六进制数 (1到2位数字)
+\uHHHH      Unicode字符附加4位十六进制数字
+\UHHHHHHHH  Unicode字符附加8位十六进制数字
+%%          百分号
+
+以及&#39;diouxXfeEgGcs&#39;中的一个结尾的C格式规范，将被转换为正确的类型并处理可变宽度。</code></pre>
+<h4 id="例子-1">例子</h4>
+<pre class="shell"><code># 使用 /usr/bin/printf 确保调用的不是内建命令。
+# 当然，在你关闭内建printf以及确认当前环境没有printf函数的情况下，可直接使用printf，详见末尾&quot;注意&quot;的链接。
+
+# 按行打印数组和关联数组的下标及值。
+
+# 声明数组可以不加&#39;declare -a&#39;或&#39;local -a&#39;（在函数内声明的局部变量）。
+arr=(&#39;line1&#39; &#39;line2&#39;)
+/usr/bin/printf &quot;%s\n&quot; ${!arr[@]}
+# 输出下标
+0
+1
+/usr/bin/printf &quot;%s\n&quot; ${arr[@]}
+# 输出值
+line1
+line2
+
+#声明关联数组（也就是字典）必须加&#39;declare -A&#39;或&#39;local -A&#39;（在函数内声明的局部变量）。
+declare -A assoc_arr=([&#39;key1&#39;]=&#39;value1&#39; [&#39;key2&#39;]=&#39;value2&#39;)
+/usr/bin/printf &quot;%s\n&quot; ${!assoc_arr[@]}
+# 输出键。
+key2
+key1
+/usr/bin/printf &quot;%s\n&quot; ${assoc_arr[@]}
+# 输出值。
+value2
+value1</code></pre>
+<h4 id="返回值-1">返回值</h4>
+<p>返回状态为成功除非给出了非法选项等。</p>
+<h4 id="注意-1">注意</h4>
+<ol type="1">
+<li><p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 printf</code>或<code>info coreutils 'pwd invocation'</code>。</p></li>
+<li><p>启动或关闭内建命令请查看<code>enable</code>命令，关于同名优先级的问题请查看<code>builtin</code>命令的例子部分的相关讨论。</p></li>
+<li><p>我通过和<code>bug-bash@gnu.org</code>的交流，得到了关于这几个格式说明符<code>%b %q %(fmt)T</code>的解释：
+&gt;
+printf(1)中的%b格式说明符是printf(3)支持的格式之外增加的一个POSIX特性。
+&gt; &gt;
+%q和%T说明符是非标准的，并且不受所有独立实现的printf的支持。</p>
+<p>更多细节请参考链接：</p>
+<ul>
+<li><a
+href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/printf.html">POSIX
+printf</a> <code>APPLICATION USAGE</code>段落的第五节。</li>
+<li><a
+href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html">POSIX
+printf格式说明符</a> 的<code>Description</code>段落。</li>
+</ul></li>
+</ol>
+</div>
+</body>
+</html>

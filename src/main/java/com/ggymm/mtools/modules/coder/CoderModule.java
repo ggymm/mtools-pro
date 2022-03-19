@@ -5,7 +5,6 @@ import com.dlsc.workbenchfx.model.WorkbenchModule;
 import com.ggymm.mtools.modules.coder.controller.CoderController;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -15,11 +14,8 @@ import java.io.IOException;
  */
 public class CoderModule extends WorkbenchModule {
 
-    private final Stage stage;
-
-    public CoderModule(Stage stage) {
-        super("代码生成", new Image("assets/icon/coder.png"));
-        this.stage = stage;
+    public CoderModule() {
+        super("代码生成", new Image("assets/icon/icons8-code-50.png"));
     }
 
     @Override

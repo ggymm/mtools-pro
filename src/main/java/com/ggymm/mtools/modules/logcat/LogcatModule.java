@@ -14,7 +14,7 @@ import java.io.IOException;
 public class LogcatModule extends WorkbenchModule {
 
     public LogcatModule() {
-        super("Logcat查看", new Image("assets/icon/android.png"));
+        super("Logcat查看", new Image("assets/icon/icons8-android-os-50.png"));
     }
 
     @Override

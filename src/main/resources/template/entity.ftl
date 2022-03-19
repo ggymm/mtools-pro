@@ -1,4 +1,9 @@
+[#ftl]
+[#if useTableAsPackage]
 package ${basePackageName}.${packageName}.entity;
+[#else]
+package ${basePackageName}.entity;
+[/#if]
 
 [#if hasId && hasTableLogic]
 import com.baomidou.mybatisplus.annotation.*;
@@ -48,7 +53,6 @@ public class ${className} [#if useParent]extends ${parentClassName} [/#if]{
         [#else]
     @TableId(value = "${field.columnName}")
         [/#if]
-    @TableField(value = "${field.columnName}")
     private ${field.javaDataType} [#if useOrigin]${field.columnName}[#else]${field.javaColumnName}[/#if];
     [/#if]
     [#if useParent && !field.exclude && !field.isKey]

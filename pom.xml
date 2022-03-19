@@ -32,7 +32,6 @@
             <version>22.0</version>
         </dependency>
 
-
         <!-- 基础框架 -->
         <dependency>
             <groupId>com.dlsc.workbenchfx</groupId>
@@ -97,18 +96,45 @@
         </dependency>
     </dependencies>
 
+
+    <repositories>
+        <repository>
+            <id>mvn repository</id>
+            <name>mvn repository</name>
+            <url>https://www.mvnrepository.com/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>aliyun maven</id>
+            <name>aliyun maven</name>
+            <url>https://maven.aliyun.com/nexus/content/repositories/central/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <build>
         <finalName>mtools</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.xml</include>
+                    <include>**/*.md</include>
                     <include>**/*.ftl</include>
-                    <include>**/*.ttf</include>
                     <include>**/*.css</include>
                     <include>**/*.png</include>
                     <include>**/*.fxml</include>
+                    <include>**/*.html</include>
                 </includes>
             </resource>
         </resources>
