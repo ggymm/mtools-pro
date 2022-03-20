@@ -77,7 +77,7 @@ public class LogcatController implements Initializable {
         this.levels.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.currentLevel = newValue);
 
         // 刷新设备列表
-        this.refreshDevice.setOnMouseClicked((event) -> {
+        this.refreshDevice.setOnMouseClicked(event -> {
             this.deviceList.getItems().clear();
             new Thread(() -> {
                 final List<String> result = new ArrayList<>();
@@ -100,14 +100,14 @@ public class LogcatController implements Initializable {
         });
 
         // 重启adb服务
-        this.adbRestart.setOnMouseClicked((event) -> {
+        this.adbRestart.setOnMouseClicked(event -> {
             // 需要清空设备列表
             this.deviceList.getItems().clear();
             CommandUtils.asyncRun(adbPath + "kill-server", adbPath + "start-server");
         });
 
         // 启动抓取日志
-        this.startOutput.setOnMouseClicked((event) -> {
+        this.startOutput.setOnMouseClicked(event -> {
             if (showLogProcess != null && showLogProcess.isAlive()) {
                 showLogProcess.destroyForcibly();
             }
@@ -151,18 +151,18 @@ public class LogcatController implements Initializable {
         });
 
         // 停止抓取日志
-        this.stopOutput.setOnMouseClicked((event) -> {
+        this.stopOutput.setOnMouseClicked(event -> {
             if (showLogProcess != null && showLogProcess.isAlive()) {
                 showLogProcess.destroyForcibly();
             }
         });
 
         // 保存日志
-        this.saveConsole.setOnMouseClicked((event) -> {
+        this.saveConsole.setOnMouseClicked(event -> {
             // 打开选择保存目录
         });
 
         // 清空日志
-        this.cleanConsole.setOnMouseClicked((event) -> this.console.getItems().clear());
+        this.cleanConsole.setOnMouseClicked(event -> this.console.getItems().clear());
     }
 }

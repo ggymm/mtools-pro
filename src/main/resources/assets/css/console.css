@@ -1,0 +1,31 @@
+.console {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 3);
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e4e7ed;
+    -fx-max-height: 274px;
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+}
+
+.console:focused {
+    -fx-background-insets: 0;
+}
+
+.console .list-cell {
+    -fx-padding: 0 16px;
+    -fx-pref-height: 32px;
+
+    -fx-font-size: 13px;
+    -fx-text-fill: #606266;
+    -fx-background-color: #ffffff;
+    -fx-cursor: hand;
+}
+
+.console .list-cell:hover {
+    -fx-background-color: #ffffff;
+}
+
+.console .list-cell:selected {
+    -fx-text-fill: #606266;
+    -fx-background-color: #ffffff;
+}

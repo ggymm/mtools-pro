@@ -22,10 +22,10 @@
 }
 
 .list-view .list-cell:hover {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #f5f7fa;
 }
 
 .list-view .list-cell:selected {
-    -fx-text-fill: #606266;
-    -fx-background-color: #ffffff;
+    -fx-text-fill: #409eff;
+    -fx-background-color: transparent;
 }

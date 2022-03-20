@@ -23,6 +23,7 @@ public class StyleUtils {
                 "assets/css/alert.css",
                 "assets/css/list-view.css",
 
+                "assets/css/console.css",
                 "assets/css/cover.css",
         };
         scene.getStylesheets().addAll(styles);

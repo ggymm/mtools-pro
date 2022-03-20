@@ -76,19 +76,19 @@ public class TableListController implements Initializable {
             double otherHeight = 100.0;
             this.tableList.setMinHeight(newValue.doubleValue() - otherHeight);
         });
-        this.selectAll.setOnMouseClicked((event) -> {
+        this.selectAll.setOnMouseClicked(event -> {
             final ObservableList<TableItem> items = this.tableList.getItems();
             for (final TableItem tableItem : items) {
                 tableItem.setSelected(true);
             }
         });
-        this.reverseSelect.setOnMouseClicked((event) -> {
+        this.reverseSelect.setOnMouseClicked(event -> {
             final ObservableList<TableItem> items = this.tableList.getItems();
             for (final TableItem tableItem : items) {
                 tableItem.setSelected(!tableItem.isSelected());
             }
         });
-        this.confirm.setOnMouseClicked((event) -> this.stage.close());
+        this.confirm.setOnMouseClicked(event -> this.stage.close());
     }
 
     public void setStage(Stage stage) {

@@ -121,7 +121,7 @@ public class CoderController implements Initializable {
         });
 
         // 刷新数据库列表
-        this.refreshDatabaseList.setOnMouseClicked((event) -> {
+        this.refreshDatabaseList.setOnMouseClicked(event -> {
             final ObservableList<String> items = this.databaseList.getItems();
             if (items != null) {
                 items.clear();
@@ -130,10 +130,10 @@ public class CoderController implements Initializable {
         });
 
         // 选择数据库表
-        this.selectTable.setOnMouseClicked((event) -> this.tableNameList.setText(TableListController.showTableList(this.currentDatabase)));
+        this.selectTable.setOnMouseClicked(event -> this.tableNameList.setText(TableListController.showTableList(this.currentDatabase)));
 
         // 选择文件输出路径
-        this.choosePath.setOnMouseClicked((event) -> {
+        this.choosePath.setOnMouseClicked(event -> {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             directoryChooser.setTitle("选择保存文件位置");
             File directory = directoryChooser.showDialog(root.getScene().getWindow());
@@ -164,7 +164,7 @@ public class CoderController implements Initializable {
         this.isColumnAutoFill.selectedProperty().addListener((observable, oldValue, newValue) -> this.autoFillColumn.setDisable(!newValue));
 
         // 生成代码
-        this.genCode.setOnMouseClicked((event) -> {
+        this.genCode.setOnMouseClicked(event -> {
             if (this.currentDatabase == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("错误");

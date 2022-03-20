@@ -129,12 +129,13 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.md</include>
                     <include>**/*.ftl</include>
                     <include>**/*.css</include>
                     <include>**/*.png</include>
+                    <include>**/*.xml</include>
                     <include>**/*.fxml</include>
                     <include>**/*.html</include>
+                    <include>**/*.json</include>
                 </includes>
             </resource>
         </resources>

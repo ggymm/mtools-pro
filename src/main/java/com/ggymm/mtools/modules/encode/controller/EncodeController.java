@@ -58,7 +58,7 @@ public class EncodeController implements Initializable {
         this.encodeTypeList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.currentType = newValue);
         this.characterTypeList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.currentCharType = newValue);
 
-        this.encode.setOnMouseClicked((event) -> {
+        this.encode.setOnMouseClicked(event -> {
             // 编码
             String input = this.input.getText();
             if (StrUtil.isBlank(input)) {
@@ -79,7 +79,7 @@ public class EncodeController implements Initializable {
             }
             this.output.setText(output);
         });
-        this.decode.setOnMouseClicked((event) -> {
+        this.decode.setOnMouseClicked(event -> {
             // 解码
             String output = this.output.getText();
             if (StrUtil.isBlank(output)) {

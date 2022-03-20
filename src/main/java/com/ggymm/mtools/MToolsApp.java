@@ -5,7 +5,7 @@ import com.ggymm.mtools.controller.CustomTab;
 import com.ggymm.mtools.modules.coder.CoderModule;
 import com.ggymm.mtools.modules.download.DownloadModule;
 import com.ggymm.mtools.modules.encode.EncodeModule;
-import com.ggymm.mtools.modules.linux.LinuxModule;
+import com.ggymm.mtools.modules.linux.LinuxCommandModule;
 import com.ggymm.mtools.modules.logcat.LogcatModule;
 import com.ggymm.mtools.modules.qrcode.QrCodeModule;
 import com.ggymm.mtools.utils.StyleUtils;
@@ -52,7 +52,7 @@ public class MToolsApp extends Application {
                         new EncodeModule(),
                         new LogcatModule(),
                         new QrCodeModule(),
-                        new LinuxModule()
+                        new LinuxCommandModule()
                 ).navigationDrawerItems(menuItems)
                 .tabFactory(CustomTab::new)
                 .build();
