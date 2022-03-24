@@ -1,6 +1,6 @@
 package com.ggymm.mtools.utils;
 
-import com.ggymm.mtools.database.model.Database;
+import com.ggymm.mtools.modules.coder.entity.CoderDatabase;
 import com.ggymm.mtools.utils.model.Table;
 import com.ggymm.mtools.utils.model.TableField;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class TestDBUtils {
 
     @Test
     public void testTableList() {
-        final Database database = new Database();
+        final CoderDatabase database = new CoderDatabase();
         database.setId(1L);
         database.setShowName("office_platform(本地)");
         database.setDriver("mysql");
@@ -36,7 +36,7 @@ public class TestDBUtils {
 
     @Test
     public void testTableFieldList() {
-        final Database database = new Database();
+        final CoderDatabase database = new CoderDatabase();
         database.setId(1L);
         database.setShowName("office_platform(本地)");
         database.setDriver("mysql");

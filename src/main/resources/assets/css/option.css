@@ -1,5 +1,5 @@
 .combo-box .list-view {
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 0, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 4);
     -fx-background-color: #fff;
     -fx-border-color: #e4e7ed;
     -fx-max-height: 274px;

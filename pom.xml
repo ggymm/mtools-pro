@@ -38,6 +38,11 @@
             <artifactId>workbenchfx-core</artifactId>
             <version>8.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>8.0.10</version>
+        </dependency>
 
         <!-- 日志配置 -->
         <dependency>

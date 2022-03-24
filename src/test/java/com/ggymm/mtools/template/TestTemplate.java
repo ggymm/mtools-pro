@@ -1,6 +1,6 @@
 package com.ggymm.mtools.template;
 
-import com.ggymm.mtools.database.model.Database;
+import com.ggymm.mtools.modules.coder.entity.CoderDatabase;
 import com.ggymm.mtools.modules.coder.model.TemplateData;
 import com.ggymm.mtools.utils.DatabaseUtils;
 import com.ggymm.mtools.utils.TemplateUtils;
@@ -21,7 +21,7 @@ public class TestTemplate {
 
     @Test
     public void testGenEntity() throws TemplateException, IOException {
-        final Database database = new Database();
+        final CoderDatabase database = new CoderDatabase();
         database.setId(1L);
         database.setShowName("office_platform(本地)");
         database.setDriver("mysql");

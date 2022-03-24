@@ -2,12 +2,16 @@ package com.ggymm.mtools.modules.coder.controller;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
-import com.ggymm.mtools.database.mapper.DatabaseMapper;
-import com.ggymm.mtools.database.model.Database;
+import com.ggymm.mtools.modules.coder.entity.CoderDatabase;
+import com.ggymm.mtools.modules.coder.mapper.CoderDatabaseMapper;
+import com.ggymm.mtools.modules.coder.mapper.CoderOutputPathMapper;
 import com.ggymm.mtools.modules.coder.model.TemplateConfig;
 import com.ggymm.mtools.modules.coder.model.TemplateData;
+import com.ggymm.mtools.modules.common.toast.ToastUtils;
 import com.ggymm.mtools.utils.DatabaseUtils;
 import com.ggymm.mtools.utils.TemplateUtils;
+import com.ggymm.mtools.utils.model.TableField;
+import com.jfoenix.controls.JFXSnackbar;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import javafx.application.Platform;
@@ -15,7 +19,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 
@@ -54,6 +61,7 @@ public class CoderController implements Initializable {
     public CheckBox isColumnAutoFill;
     public CheckBox isDateColumnFormat;
     public CheckBox isColumnTableLogic;
+    public CheckBox isGenFrontend;
 
     public TextField packageName;
     public TextField parentPackageName;
@@ -64,9 +72,10 @@ public class CoderController implements Initializable {
     public Button saveConfig;
     public Button openFolder;
 
-    private List<Database> databases;
-    private Database currentDatabase;
+    private List<CoderDatabase> databases;
+    private CoderDatabase currentDatabase;
 
+    private JFXSnackbar snackbar;
 
     public static Node getView() throws IOException {
         final URL url = CoderController.class.getResource("/fxml/coder.fxml");
@@ -82,7 +91,9 @@ public class CoderController implements Initializable {
 
     private void initView() {
         this.renderDatabase();
+        this.renderOutputPath();
 
+        snackbar = new JFXSnackbar(root);
         // 默认配置
         this.isUseParent.setSelected(false);
         this.isEntityOnly.setSelected(true);
@@ -92,6 +103,7 @@ public class CoderController implements Initializable {
         this.isColumnAutoFill.setSelected(true);
         this.isDateColumnFormat.setSelected(true);
         this.isColumnTableLogic.setSelected(true);
+        this.isGenFrontend.setSelected(true);
 
         this.packageName.setText("com.ninelock.api");
         this.parentPackageName.setDisable(true);
@@ -113,7 +125,10 @@ public class CoderController implements Initializable {
     private void initEvent() {
         // 监听数据库列表选择
         this.databaseList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            for (Database database : databases) {
+            if (newValue == null) {
+                return;
+            }
+            for (CoderDatabase database : databases) {
                 if (newValue.equals(database.getShowName())) {
                     this.currentDatabase = database;
                 }
@@ -134,8 +149,15 @@ public class CoderController implements Initializable {
 
         // 选择文件输出路径
         this.choosePath.setOnMouseClicked(event -> {
+            final File lastFolder = new File(this.outputPath.getText());
+            if (!lastFolder.exists() && !lastFolder.isDirectory()) {
+                if (!lastFolder.mkdirs()) {
+                    return;
+                }
+            }
             DirectoryChooser directoryChooser = new DirectoryChooser();
             directoryChooser.setTitle("选择保存文件位置");
+            directoryChooser.setInitialDirectory(lastFolder);
             File directory = directoryChooser.showDialog(root.getScene().getWindow());
             if (directory != null) {
                 this.outputPath.setText(directory.getAbsolutePath());
@@ -166,23 +188,21 @@ public class CoderController implements Initializable {
         // 生成代码
         this.genCode.setOnMouseClicked(event -> {
             if (this.currentDatabase == null) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("错误");
-                alert.setHeaderText("未选择数据库");
-                alert.showAndWait();
+                ToastUtils.error(snackbar, "错误, 未选择数据库");
                 return;
             }
 
             String tableNameList = this.tableNameList.getText();
             if (StrUtil.isBlank(tableNameList)) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("错误");
-                alert.setHeaderText("未选择数据表");
-                alert.showAndWait();
+                ToastUtils.error(snackbar, "错误, 未选择数据表");
                 return;
             }
 
             final List<TemplateConfig> templateList = new ArrayList<>();
+            if (this.isGenFrontend.isSelected()) {
+                templateList.add(new TemplateConfig("vue/data", "Data.js", "vue_data"));
+                templateList.add(new TemplateConfig("vue/rules", "Rules.js", "vue_rules"));
+            }
             if (!this.isEntityOnly.isSelected()) {
                 templateList.add(new TemplateConfig("controller", "Controller.java", "controller"));
                 templateList.add(new TemplateConfig("service", "Service.java", "service"));
@@ -191,24 +211,13 @@ public class CoderController implements Initializable {
             templateList.add(new TemplateConfig("mapper/xml", "Mapper.xml", "mapperXml"));
             templateList.add(new TemplateConfig("entity", ".java", "entity"));
 
-            final TemplateData templateData = new TemplateData();
-
-            templateData.setUseParent(this.isUseParent.isSelected());
-            templateData.setUseOrigin(this.isUseOriginColumn.isSelected());
-            templateData.setUseTableAsPackage(this.isUseTableAsPackage.isSelected());
-
-            templateData.setAutoFill(this.isColumnAutoFill.isSelected());
-            templateData.setFormatDate(this.isDateColumnFormat.isSelected());
-            templateData.setTableLogic(this.isColumnTableLogic.isSelected());
-
-            templateData.setBasePackageName(this.packageName.getText());
-            templateData.setParentClass(this.parentPackageName.getText());
-            templateData.setExcludeColumn(this.excludeColumn.getText());
-            templateData.setAutoFillColumn(this.autoFillColumn.getText());
-
             final String[] tableList = tableNameList.split(";");
 
-            generateFiles(this.outputPath.getText(), templateData, templateList, tableList);
+            generateFiles(this.outputPath.getText(), templateList, tableList);
+        });
+
+        this.saveConfig.setOnMouseClicked((event) -> {
+
         });
     }
 
@@ -217,20 +226,49 @@ public class CoderController implements Initializable {
      */
     private void renderDatabase() {
         new Thread(() -> {
-            databases = DatabaseMapper.getList();
+            databases = CoderDatabaseMapper.getList();
             Platform.runLater(() -> {
-                for (Database database : databases) {
+                for (CoderDatabase database : databases) {
                     this.databaseList.getItems().add(database.getShowName());
                 }
             });
         }).start();
     }
 
-    private void generateFiles(String outputPath, TemplateData templateData, List<TemplateConfig> templateList, String[] tableList) {
+    private void renderOutputPath() {
+        new Thread(() -> {
+            final String lastOutputPath = CoderOutputPathMapper.lastOutputPath();
+            Platform.runLater(() -> this.outputPath.setText(lastOutputPath));
+        }).start();
+    }
+
+    private void generateFiles(String outputPath, List<TemplateConfig> templateList, String[] tableList) {
+        CoderOutputPathMapper.save(outputPath);
         new Thread(() -> {
             for (String table : tableList) {
+                // 获取表的字段列表
+                final List<TableField> tableFieldList = DatabaseUtils.tableFieldList(this.currentDatabase, table);
+
+                final TemplateData templateData = new TemplateData();
+
+                templateData.setUseParent(this.isUseParent.isSelected());
+                templateData.setUseOrigin(this.isUseOriginColumn.isSelected());
+                templateData.setUseTableAsPackage(this.isUseTableAsPackage.isSelected());
+
+                templateData.setAutoFill(this.isColumnAutoFill.isSelected());
+                templateData.setFormatDate(this.isDateColumnFormat.isSelected());
+                templateData.setTableLogic(this.isColumnTableLogic.isSelected());
+
+                templateData.setBasePackageName(this.packageName.getText());
+                templateData.setParentClass(this.parentPackageName.getText());
+                templateData.setExcludeColumn(this.excludeColumn.getText());
+                templateData.setAutoFillColumn(this.autoFillColumn.getText());
+
                 templateData.setTableName(table);
-                templateData.setFieldList(DatabaseUtils.tableFieldList(this.currentDatabase, table));
+                templateData.setFieldList(tableFieldList);
+                if (this.isGenFrontend.isSelected()) {
+                    templateData.setVueFieldList(tableFieldList);
+                }
 
                 for (TemplateConfig config : templateList) {
                     // 写入文件路径
@@ -265,11 +303,7 @@ public class CoderController implements Initializable {
             }
 
             Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.getDialogPane().getStyleClass().add("alert-success");
-                alert.setTitle("成功");
-                alert.setHeaderText("代码生成完毕");
-                alert.showAndWait();
+                ToastUtils.info(snackbar, "生成完毕");
             });
         }).start();
     }

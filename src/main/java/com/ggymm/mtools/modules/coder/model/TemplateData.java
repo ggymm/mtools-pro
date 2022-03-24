@@ -6,6 +6,7 @@ import com.ggymm.mtools.utils.model.TableField;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,7 @@ public class TemplateData {
 
     private String tableName;
     private List<TableField> fieldList;
+    private List<TableField> vueFieldList;
     /**
      * 根据配置信息自动生成的信息
      */
@@ -128,7 +130,7 @@ public class TemplateData {
                 if (this.autoFill) {
                     for (String column : this.autoFillColumns) {
                         if (field.getColumnName().equals(column)) {
-                            field.setIsAuto(true);
+                            field.setAutoFill(true);
                             if (column.contains("update")) {
                                 field.setAutoFillType("INSERT_UPDATE");
                             } else {
@@ -144,6 +146,41 @@ public class TemplateData {
         }
 
         this.fieldList = fieldList;
+    }
+
+    public void setVueFieldList(List<TableField> fieldList) {
+        final List<TableField> vueFieldList = new ArrayList<>();
+        for (TableField field : fieldList) {
+            if (this.useParent) {
+                boolean isExclude = false;
+                for (String column : this.excludeColumns) {
+                    if (field.getColumnName().equals(column)) {
+                        isExclude = true;
+                        break;
+                    }
+                }
+                if (!isExclude) {
+                    vueFieldList.add(field);
+                }
+            } else {
+                if (this.autoFill) {
+                    boolean isAutoFill = false;
+                    for (String column : this.autoFillColumns) {
+                        if (field.getColumnName().equals(column)) {
+                            isAutoFill = true;
+                            break;
+                        }
+                    }
+                    if (!isAutoFill) {
+                        vueFieldList.add(field);
+                    }
+                } else {
+                    vueFieldList.add(field);
+                }
+            }
+        }
+
+        this.vueFieldList = vueFieldList;
     }
 
     private String formatJavaType(String mysqlType) {

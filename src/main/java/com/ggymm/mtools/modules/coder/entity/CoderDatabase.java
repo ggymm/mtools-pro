@@ -1,4 +1,4 @@
-package com.ggymm.mtools.database.model;
+package com.ggymm.mtools.modules.coder.entity;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import lombok.Data;
  * @version 创建时间: 2022-01-12 18:00
  */
 @Data
-public class Database {
+public class CoderDatabase {
     private Long id;
     private String showName;
     private String driver;

@@ -1,7 +1,7 @@
-package com.ggymm.mtools.database.mapper;
+package com.ggymm.mtools.modules.coder.mapper;
 
-import com.ggymm.mtools.database.DataSource;
-import com.ggymm.mtools.database.model.Database;
+import com.ggymm.mtools.modules.common.DataSource;
+import com.ggymm.mtools.modules.coder.entity.CoderDatabase;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -14,18 +14,18 @@ import java.util.List;
  * @author gongym
  * @version 创建时间: 2022-01-13 21:33
  */
-public class DatabaseMapper {
+public class CoderDatabaseMapper {
 
-    public static List<Database> getList() {
-        List<Database> databaseList = new ArrayList<>();
+    public static List<CoderDatabase> getList() {
+        List<CoderDatabase> databaseList = new ArrayList<>();
 
         // 获取数据库连接查询数据库
         Connection connection = DataSource.getConnection();
         if (connection != null) {
             final QueryRunner queryRunner = new QueryRunner();
-            final String sql = "select * from database";
+            final String sql = "SELECT * FROM coder_database";
             try {
-                databaseList = queryRunner.query(connection, sql, new BeanListHandler<>(Database.class));
+                databaseList = queryRunner.query(connection, sql, new BeanListHandler<>(CoderDatabase.class));
             } catch (SQLException e) {
                 e.printStackTrace();
             }

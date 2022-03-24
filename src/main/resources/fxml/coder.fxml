@@ -100,6 +100,11 @@
                                 <Insets left="24.0" />
                             </HBox.margin>
                         </CheckBox>
+                  <CheckBox fx:id="isGenFrontend" mnemonicParsing="false" text="生成前端代码片段">
+                     <HBox.margin>
+                        <Insets left="24.0" />
+                     </HBox.margin>
+                  </CheckBox>
                     </children>
                 </HBox>
                 <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="9">

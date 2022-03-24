@@ -12,6 +12,7 @@ public class StyleUtils {
         // 设置自定义样式
         final String[] styles = new String[]{
                 "assets/css/main.css",
+                "assets/css/jfoenix.css",
 
                 "assets/css/button.css",
 
@@ -20,7 +21,6 @@ public class StyleUtils {
                 "assets/css/select.css",
                 "assets/css/option.css",
 
-                "assets/css/alert.css",
                 "assets/css/list-view.css",
 
                 "assets/css/console.css",

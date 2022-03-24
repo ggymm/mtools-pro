@@ -1,4 +1,4 @@
-package com.ggymm.mtools.database;
+package com.ggymm.mtools.modules.common;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

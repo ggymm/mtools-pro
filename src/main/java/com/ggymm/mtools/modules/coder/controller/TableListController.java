@@ -1,6 +1,6 @@
 package com.ggymm.mtools.modules.coder.controller;
 
-import com.ggymm.mtools.database.model.Database;
+import com.ggymm.mtools.modules.coder.entity.CoderDatabase;
 import com.ggymm.mtools.utils.DatabaseUtils;
 import com.ggymm.mtools.utils.StyleUtils;
 import com.ggymm.mtools.utils.model.Table;
@@ -45,9 +45,9 @@ public class TableListController implements Initializable {
     public Button confirm;
 
     private Stage stage;
-    private Database currentDatabase;
+    private CoderDatabase currentDatabase;
 
-    public static String showTableList(Database currentDatabase) {
+    public static String showTableList(CoderDatabase currentDatabase) {
         try {
             final URL url = TableListController.class.getResource("/fxml/table-list.fxml");
             final FXMLLoader loader = new FXMLLoader(url);
@@ -95,7 +95,7 @@ public class TableListController implements Initializable {
         this.stage = stage;
     }
 
-    public void setCurrentDatabase(Database currentDatabase) {
+    public void setCurrentDatabase(CoderDatabase currentDatabase) {
         if (currentDatabase == null) {
             return;
         }

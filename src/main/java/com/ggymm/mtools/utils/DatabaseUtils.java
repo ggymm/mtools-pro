@@ -1,6 +1,6 @@
 package com.ggymm.mtools.utils;
 
-import com.ggymm.mtools.database.model.Database;
+import com.ggymm.mtools.modules.coder.entity.CoderDatabase;
 import com.ggymm.mtools.utils.model.Table;
 import com.ggymm.mtools.utils.model.TableField;
 import org.apache.commons.dbutils.QueryRunner;
@@ -27,7 +27,7 @@ public class DatabaseUtils {
             ", IF(EXTRA = 'auto_increment', TRUE, FALSE) AS IS_AUTO" +
             " FROM information_schema.COLUMNS WHERE TABLE_NAME = ? AND TABLE_SCHEMA = ?";
 
-    public static Connection createConnection(Database db) {
+    public static Connection createConnection(CoderDatabase db) {
         Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -42,7 +42,7 @@ public class DatabaseUtils {
         return connection;
     }
 
-    public static List<Table> tableList(Database db) {
+    public static List<Table> tableList(CoderDatabase db) {
         final List<Table> tableList = new ArrayList<>();
 
         final Connection connection = createConnection(db);
@@ -62,7 +62,7 @@ public class DatabaseUtils {
         return tableList;
     }
 
-    public static List<TableField> tableFieldList(Database db, String tableName) {
+    public static List<TableField> tableFieldList(CoderDatabase db, String tableName) {
         final List<TableField> tableFieldList = new ArrayList<>();
 
         final Connection connection = createConnection(db);
