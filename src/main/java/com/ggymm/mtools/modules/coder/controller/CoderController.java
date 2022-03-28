@@ -243,8 +243,10 @@ public class CoderController implements Initializable {
     }
 
     private void generateFiles(String outputPath, List<TemplateConfig> templateList, String[] tableList) {
-        CoderOutputPathMapper.save(outputPath);
         new Thread(() -> {
+            // 保存上次输出路径
+            CoderOutputPathMapper.update(outputPath);
+
             for (String table : tableList) {
                 // 获取表的字段列表
                 final List<TableField> tableFieldList = DatabaseUtils.tableFieldList(this.currentDatabase, table);
@@ -302,9 +304,7 @@ public class CoderController implements Initializable {
                 }
             }
 
-            Platform.runLater(() -> {
-                ToastUtils.info(snackbar, "生成完毕");
-            });
+            Platform.runLater(() -> ToastUtils.info(snackbar, "生成完毕"));
         }).start();
     }
 }

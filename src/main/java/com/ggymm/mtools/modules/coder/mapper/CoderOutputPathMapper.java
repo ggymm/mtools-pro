@@ -14,6 +14,14 @@ import java.util.Map;
  */
 public class CoderOutputPathMapper {
 
+    public static void update(String path) {
+        final String lastOutputPath = lastOutputPath();
+        if (lastOutputPath.equals(path)) {
+            return;
+        }
+        save(path);
+    }
+
     public static void save(String path) {
         // 获取数据库连接查询数据库
         Connection connection = DataSource.getConnection();

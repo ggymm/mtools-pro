@@ -1,10 +1,6 @@
 package com.ggymm.mtools.modules.encode.controller;
 
-import cn.hutool.core.codec.Base64;
-import cn.hutool.core.text.UnicodeUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.util.URLUtil;
-import com.ggymm.mtools.modules.coder.controller.CoderController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -14,7 +10,8 @@ import javafx.scene.control.TextArea;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -35,6 +32,15 @@ public class EncodeController implements Initializable {
     private String currentType;
     private String currentCharType;
 
+    private Map<String, Handler> handlerMap = new HashMap<String, Handler>() {
+        {
+            put("Base64", HandlerBase64.getInstance());
+            put("Unicode", HandlerUnicode.getInstance());
+            put("URL", HandlerURL.getInstance());
+            put("UTF-8", null);
+        }
+    };
+
     public static Node getView() throws IOException {
         final URL url = EncodeController.class.getResource("/fxml/encode.fxml");
         final FXMLLoader loader = new FXMLLoader(url);
@@ -50,54 +56,39 @@ public class EncodeController implements Initializable {
     private void initView() {
         this.encodeTypeList.getItems().addAll("Base64", "Unicode", "URL", "UTF-8");
         this.encodeTypeList.setValue("Base64");
+        this.currentType = "Base64";
+
         this.characterTypeList.getItems().addAll("UTF-8", "GBK");
         this.characterTypeList.setValue("UTF-8");
+        this.currentCharType = "UTF-8";
     }
 
     private void initEvent() {
         this.encodeTypeList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.currentType = newValue);
         this.characterTypeList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> this.currentCharType = newValue);
 
+        // 编码
         this.encode.setOnMouseClicked(event -> {
-            // 编码
             String input = this.input.getText();
             if (StrUtil.isBlank(input)) {
                 return;
             }
-            String output = "";
-            switch (this.currentType) {
-                case "Base64":
-                    output = Base64.encode(input, this.currentCharType);
-                    break;
-                case "Unicode":
-                    output = UnicodeUtil.toUnicode(input);
-                    break;
-                case "URL":
-                    output = URLUtil.encode(input, Charset.forName(this.currentCharType));
-                    break;
-                case "UTF-8":
+            final Handler handler = handlerMap.get(this.currentType);
+            if (handler != null) {
+                this.output.setText(handler.encode(input, this.currentCharType));
             }
-            this.output.setText(output);
         });
+
+        // 解码
         this.decode.setOnMouseClicked(event -> {
-            // 解码
-            String output = this.output.getText();
-            if (StrUtil.isBlank(output)) {
+            String input = this.input.getText();
+            if (StrUtil.isBlank(input)) {
                 return;
             }
-            String input = "";
-            switch (this.currentType) {
-                case "Base64":
-                    input = Base64.decodeStr(output, this.currentCharType);
-                    break;
-                case "Unicode":
-                    input = UnicodeUtil.toString(output);
-                    break;
-                case "URL":
-                    input = URLUtil.decode(output, this.currentCharType);
-                case "UTF-8":
+            final Handler handler = handlerMap.get(this.currentType);
+            if (handler != null) {
+                this.output.setText(handler.decode(input, this.currentCharType));
             }
-            this.input.setText(input);
         });
     }
 }
