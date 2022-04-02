@@ -68,6 +68,13 @@
             <version>2.3.31</version>
         </dependency>
 
+        <!-- 二维码识别与生成工具库 -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+
         <!-- 数据库驱动 -->
         <dependency>
             <groupId>org.xerial</groupId>

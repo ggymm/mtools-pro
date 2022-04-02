@@ -93,7 +93,7 @@ public class CoderController implements Initializable {
         this.renderDatabase();
         this.renderOutputPath();
 
-        snackbar = new JFXSnackbar(root);
+        this.snackbar = new JFXSnackbar(root);
         // 默认配置
         this.isUseParent.setSelected(false);
         this.isEntityOnly.setSelected(true);
@@ -158,7 +158,7 @@ public class CoderController implements Initializable {
             DirectoryChooser directoryChooser = new DirectoryChooser();
             directoryChooser.setTitle("选择保存文件位置");
             directoryChooser.setInitialDirectory(lastFolder);
-            File directory = directoryChooser.showDialog(root.getScene().getWindow());
+            File directory = directoryChooser.showDialog(null);
             if (directory != null) {
                 this.outputPath.setText(directory.getAbsolutePath());
             }
@@ -187,14 +187,17 @@ public class CoderController implements Initializable {
 
         // 生成代码
         this.genCode.setOnMouseClicked(event -> {
+            // 禁用按钮
+            this.genCode.setDisable(true);
+
             if (this.currentDatabase == null) {
-                ToastUtils.error(snackbar, "错误, 未选择数据库");
+                ToastUtils.error(this.snackbar, "错误, 未选择数据库");
                 return;
             }
 
             String tableNameList = this.tableNameList.getText();
             if (StrUtil.isBlank(tableNameList)) {
-                ToastUtils.error(snackbar, "错误, 未选择数据表");
+                ToastUtils.error(this.snackbar, "错误, 未选择数据表");
                 return;
             }
 
@@ -304,7 +307,10 @@ public class CoderController implements Initializable {
                 }
             }
 
-            Platform.runLater(() -> ToastUtils.info(snackbar, "生成完毕"));
+            Platform.runLater(() -> {
+                this.genCode.setDisable(false);
+                ToastUtils.info(this.snackbar, "生成完毕");
+            });
         }).start();
     }
 }

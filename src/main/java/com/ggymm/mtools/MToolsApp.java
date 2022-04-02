@@ -8,6 +8,7 @@ import com.ggymm.mtools.modules.encode.EncodeModule;
 import com.ggymm.mtools.modules.linux.LinuxCommandModule;
 import com.ggymm.mtools.modules.logcat.LogcatModule;
 import com.ggymm.mtools.modules.qrcode.QrCodeModule;
+import com.ggymm.mtools.modules.tools.ToolsModule;
 import com.ggymm.mtools.utils.StyleUtils;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -48,12 +49,16 @@ public class MToolsApp extends Application {
 
         workbench = Workbench.builder(
                         new CoderModule(),
-                        new DownloadModule(),
                         new EncodeModule(),
                         new LogcatModule(),
-                        new QrCodeModule(),
-                        new LinuxCommandModule()
+
+                        new LinuxCommandModule(),
+                        new ToolsModule(),
+
+                        new DownloadModule(),
+                        new QrCodeModule()
                 ).navigationDrawerItems(menuItems)
+                .modulesPerPage(9)
                 .tabFactory(CustomTab::new)
                 .build();
 

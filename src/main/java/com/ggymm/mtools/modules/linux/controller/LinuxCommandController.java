@@ -53,7 +53,7 @@ public class LinuxCommandController implements Initializable {
 
     private void initView() {
         this.root.heightProperty().addListener((observable, oldValue, newValue) -> {
-            double otherHeight = 100.0;
+            final double otherHeight = 100.0;
             this.commandList.setMinHeight(newValue.doubleValue() - otherHeight);
         });
 

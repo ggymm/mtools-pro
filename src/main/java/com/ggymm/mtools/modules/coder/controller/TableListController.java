@@ -73,15 +73,17 @@ public class TableListController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.root.heightProperty().addListener((observable, oldValue, newValue) -> {
-            double otherHeight = 100.0;
+            final double otherHeight = 100.0;
             this.tableList.setMinHeight(newValue.doubleValue() - otherHeight);
         });
+
         this.selectAll.setOnMouseClicked(event -> {
             final ObservableList<TableItem> items = this.tableList.getItems();
             for (final TableItem tableItem : items) {
                 tableItem.setSelected(true);
             }
         });
+
         this.reverseSelect.setOnMouseClicked(event -> {
             final ObservableList<TableItem> items = this.tableList.getItems();
             for (final TableItem tableItem : items) {

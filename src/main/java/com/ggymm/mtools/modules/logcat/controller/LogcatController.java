@@ -62,8 +62,8 @@ public class LogcatController implements Initializable {
     }
 
     private void initView() {
-        root.heightProperty().addListener((observable, oldValue, newValue) -> {
-            double otherHeight = 48.0 + 24.0 * 2 + 32.0 * 2;
+        this.root.heightProperty().addListener((observable, oldValue, newValue) -> {
+            final double otherHeight = 48.0 + 24.0 * 2 + 32.0 * 2;
             this.console.setMinHeight(newValue.doubleValue() - otherHeight);
         });
     }
