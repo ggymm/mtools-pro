@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ggymm.mtools.modules.encode.controller.EncodeController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.ggymm.mtools.modules.encode.controller.EncodeController">
     <children>
         <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="16.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0"
                   AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
