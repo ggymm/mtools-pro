@@ -105,7 +105,7 @@ public class LinuxCommandController implements Initializable {
         });
 
         this.commandList.setRowFactory(tv -> {
-            TableRow<CommandItem> row = new TableRow<>();
+            final TableRow<CommandItem> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     String itemName = row.getItem().name;

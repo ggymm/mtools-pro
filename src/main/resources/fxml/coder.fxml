@@ -4,10 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="root" xmlns="http://javafx.com/javafx/8" fx:controller="com.ggymm.mtools.modules.coder.controller.CoderController">
+
+<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ggymm.mtools.modules.coder.controller.CoderController">
     <children>
-        <GridPane alignment="CENTER" hgap="24.0" layoutX="55.0" layoutY="45.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="24.0"
-                  AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
+        <GridPane alignment="CENTER" hgap="24.0" layoutX="55.0" layoutY="45.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="24.0">
             <columnConstraints>
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="600.0" prefWidth="600.0" />
@@ -110,15 +110,6 @@
                 <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="9">
                     <children>
                         <Button fx:id="genCode" minWidth="100.0" mnemonicParsing="false" text="生成代码">
-                            <styleClass>
-                                <String fx:value="btn" />
-                                <String fx:value="btn-primary" />
-                            </styleClass>
-                        </Button>
-                        <Button fx:id="saveConfig" minWidth="100.0" mnemonicParsing="false" text="保存配置">
-                            <HBox.margin>
-                                <Insets left="24.0" />
-                            </HBox.margin>
                             <styleClass>
                                 <String fx:value="btn" />
                                 <String fx:value="btn-primary" />

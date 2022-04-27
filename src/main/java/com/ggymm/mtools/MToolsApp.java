@@ -4,7 +4,9 @@ import com.dlsc.workbenchfx.Workbench;
 import com.ggymm.mtools.controller.CustomTab;
 import com.ggymm.mtools.modules.coder.CoderModule;
 import com.ggymm.mtools.modules.download.DownloadModule;
+import com.ggymm.mtools.modules.emoji.EmojiModule;
 import com.ggymm.mtools.modules.encode.EncodeModule;
+import com.ggymm.mtools.modules.gobang.GobangModule;
 import com.ggymm.mtools.modules.linux.LinuxCommandModule;
 import com.ggymm.mtools.modules.logcat.LogcatModule;
 import com.ggymm.mtools.modules.qrcode.QrCodeModule;
@@ -56,7 +58,9 @@ public class MToolsApp extends Application {
                         new ToolsModule(),
 
                         new DownloadModule(),
-                        new QrCodeModule()
+                        new QrCodeModule(),
+                        new EmojiModule(),
+                        new GobangModule()
                 ).navigationDrawerItems(menuItems)
                 .modulesPerPage(9)
                 .tabFactory(CustomTab::new)

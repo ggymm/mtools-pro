@@ -1,8 +1,11 @@
 package com.ggymm.mtools.modules.qrcode.controller;
 
 import cn.hutool.core.util.StrUtil;
+import com.ggymm.mtools.modules.common.toast.ToastUtils;
 import com.ggymm.mtools.utils.QrCodeUtils;
+import com.jfoenix.controls.JFXSnackbar;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -14,6 +17,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -36,6 +40,8 @@ public class QrCodeController implements Initializable {
 
     public TextArea parseResult;
 
+    private JFXSnackbar snackbar;
+
     public static Node getView() throws IOException {
         final URL url = QrCodeController.class.getResource("/fxml/qr-code.fxml");
         final FXMLLoader loader = new FXMLLoader(url);
@@ -49,6 +55,8 @@ public class QrCodeController implements Initializable {
     }
 
     private void initView() {
+        this.snackbar = new JFXSnackbar(root);
+
         this.root.heightProperty().addListener((observable, oldValue, newValue) -> setImageSize());
         this.root.widthProperty().addListener((observable, oldValue, newValue) -> setImageSize());
     }
@@ -69,10 +77,10 @@ public class QrCodeController implements Initializable {
         });
 
         this.loadLocalImage.setOnMouseClicked(event -> {
-            FileChooser fileChooser = new FileChooser();
+            final FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("选择二维码");
             fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("All Images", "*.png", "*.jpg", "*.bmp"),
+                    new FileChooser.ExtensionFilter("All Images", "*.png", "*.jpg", "*.jpeg", "*.bmp", "*.gif"),
                     new FileChooser.ExtensionFilter("All Files", "*.")
             );
             final File file = fileChooser.showOpenDialog(null);
@@ -93,7 +101,33 @@ public class QrCodeController implements Initializable {
         });
 
         this.saveImage.setOnMouseClicked(event -> {
-
+            final Image image = this.qrCodeImage.getImage();
+            if (image == null) {
+                ToastUtils.error(this.snackbar, "图片为空, 不能保存");
+                return;
+            }
+            final FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("保存二维码");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("All Images", "*.*"),
+                    new FileChooser.ExtensionFilter("PNG", "*.png"),
+                    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                    new FileChooser.ExtensionFilter("JPEG", "*.jpeg"),
+                    new FileChooser.ExtensionFilter("BPM", "*.bmp"),
+                    new FileChooser.ExtensionFilter("GIF", "*.gif")
+            );
+            final File file = fileChooser.showSaveDialog(null);
+            if (file != null) {
+                try {
+                    String[] fileType = file.getPath().split("\\.");
+                    ImageIO.write(SwingFXUtils.fromFXImage(image, null),
+                            fileType[fileType.length - 1],
+                            file);
+                    ToastUtils.info(this.snackbar, "图片保存成功");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
 
         this.parseResult.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -113,18 +147,18 @@ public class QrCodeController implements Initializable {
     }
 
     private void setImageSize() {
-        final double otherHeight = 60.0 + 200.0 + 48.0 * 2 + 20.0 * 2;
-        final double currHeight = this.root.getHeight() - otherHeight;
-
         final double otherWidth = 48.0 * 2 + 20.0 * 2;
-        final double currWidth = this.root.getWidth() - otherWidth;
+        final double currentWidth = this.root.getWidth() - otherWidth;
 
-        if (currWidth > currHeight) {
-            this.qrCodeImage.setFitWidth(currHeight);
-            this.qrCodeImage.setFitHeight(currHeight);
+        final double otherHeight = 60.0 + 200.0 + 48.0 * 2 + 20.0 * 2;
+        final double currentHeight = this.root.getHeight() - otherHeight;
+
+        if (currentWidth > currentHeight) {
+            this.qrCodeImage.setFitWidth(currentHeight);
+            this.qrCodeImage.setFitHeight(currentHeight);
         } else {
-            this.qrCodeImage.setFitWidth(currWidth);
-            this.qrCodeImage.setFitHeight(currWidth);
+            this.qrCodeImage.setFitWidth(currentWidth);
+            this.qrCodeImage.setFitHeight(currentWidth);
         }
     }
 }

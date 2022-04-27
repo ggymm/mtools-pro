@@ -13,7 +13,7 @@ public class TemplateUtils {
 
     public static Template getTemplate(String name) {
         try {
-            Configuration config = new Configuration(Configuration.VERSION_2_3_31);
+            final Configuration config = new Configuration(Configuration.VERSION_2_3_31);
             config.setClassForTemplateLoading(TemplateUtils.class, "/template");
             config.setDefaultEncoding("UTF-8");
             return config.getTemplate(name + ".ftl");

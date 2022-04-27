@@ -69,7 +69,6 @@ public class CoderController implements Initializable {
     public TextField autoFillColumn;
 
     public Button genCode;
-    public Button saveConfig;
     public Button openFolder;
 
     private List<CoderDatabase> databases;
@@ -155,7 +154,7 @@ public class CoderController implements Initializable {
                     return;
                 }
             }
-            DirectoryChooser directoryChooser = new DirectoryChooser();
+            final DirectoryChooser directoryChooser = new DirectoryChooser();
             directoryChooser.setTitle("选择保存文件位置");
             directoryChooser.setInitialDirectory(lastFolder);
             File directory = directoryChooser.showDialog(null);
@@ -192,12 +191,14 @@ public class CoderController implements Initializable {
 
             if (this.currentDatabase == null) {
                 ToastUtils.error(this.snackbar, "错误, 未选择数据库");
+                this.genCode.setDisable(false);
                 return;
             }
 
             String tableNameList = this.tableNameList.getText();
             if (StrUtil.isBlank(tableNameList)) {
                 ToastUtils.error(this.snackbar, "错误, 未选择数据表");
+                this.genCode.setDisable(false);
                 return;
             }
 
@@ -219,8 +220,12 @@ public class CoderController implements Initializable {
             generateFiles(this.outputPath.getText(), templateList, tableList);
         });
 
-        this.saveConfig.setOnMouseClicked((event) -> {
-
+        this.openFolder.setOnMouseClicked((event) -> {
+            try {
+                Runtime.getRuntime().exec("explorer.exe /select," + this.outputPath.getText());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 
@@ -308,8 +313,8 @@ public class CoderController implements Initializable {
             }
 
             Platform.runLater(() -> {
-                this.genCode.setDisable(false);
                 ToastUtils.info(this.snackbar, "生成完毕");
+                this.genCode.setDisable(false);
             });
         }).start();
     }

@@ -68,7 +68,7 @@ public class DatabaseUtils {
         final Connection connection = createConnection(db);
         final QueryRunner queryRunner = new QueryRunner();
         try {
-            List<Map<String, Object>> tableFieldMapList = queryRunner.query(connection, QUERY_TABLE_FIELD_LIST, new MapListHandler(), tableName, db.getName());
+            final List<Map<String, Object>> tableFieldMapList = queryRunner.query(connection, QUERY_TABLE_FIELD_LIST, new MapListHandler(), tableName, db.getName());
             for (Map<String, Object> tableMap : tableFieldMapList) {
                 final TableField tableField = new TableField();
                 tableField.setColumnName(String.valueOf(tableMap.get("COLUMN_NAME")));
