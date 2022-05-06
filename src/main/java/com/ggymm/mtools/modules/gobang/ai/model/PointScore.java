@@ -39,10 +39,6 @@ public class PointScore {
                 ", empty=" + empty + "}";
     }
 
-    public int totalCount() {
-        return this.count + this.reverseCount;
-    }
-
     public void addCount() {
         this.count++;
     }
@@ -68,6 +64,9 @@ public class PointScore {
      * @return 分数
      */
     public int countScore() {
+        // 两侧棋子数需要加在一起
+        this.count = this.count + this.reverseCount;
+
         if (this.empty <= 0) { // 没有空位
 
             if (this.count >= 5) {

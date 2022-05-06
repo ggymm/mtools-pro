@@ -14,8 +14,6 @@ import static com.ggymm.mtools.modules.gobang.ai.Role.AI;
 import static com.ggymm.mtools.modules.gobang.ai.Role.PLAYER;
 import static com.ggymm.mtools.modules.gobang.ai.Toolkit.fixScore;
 import static com.ggymm.mtools.modules.gobang.ai.Toolkit.hasNeighbor;
-import static com.ggymm.mtools.modules.gobang.ai.constant.Constant.DEBUG;
-import static com.ggymm.mtools.modules.gobang.ai.constant.Constant.DEBUG_ROLE;
 import static com.ggymm.mtools.modules.gobang.ai.constant.Constant.Direction.*;
 import static com.ggymm.mtools.modules.gobang.ai.constant.Constant.Score.*;
 
@@ -290,17 +288,9 @@ public class Board {
                 }
             }
 
-            pointScore.setCount(pointScore.totalCount());
-
-            final int countScore = pointScore.countScore();
-            count += countScore;
-            if (DEBUG && DEBUG_ROLE == role) {
-                System.out.println(role + " == 横向");
-                System.out.println("x: " + x + " == y: " + y);
-                System.out.println(pointScore);
-                System.out.println(countScore);
-                System.out.println("===============");
-            }
+            count += pointScore.countScore();
+            // 输出调试信息
+            Debug.printEvaluatePoint(role, direction, x, y, pointScore);
         }
 
         // 纵向
@@ -360,17 +350,9 @@ public class Board {
                 }
             }
 
-            pointScore.setCount(pointScore.totalCount());
-
-            final int countScore = pointScore.countScore();
-            count += countScore;
-            if (DEBUG && DEBUG_ROLE == role) {
-                System.out.println(role + " == 纵向");
-                System.out.println("x: " + x + " == y: " + y);
-                System.out.println(pointScore);
-                System.out.println(countScore);
-                System.out.println("===============");
-            }
+            count += pointScore.countScore();
+            // 输出调试信息
+            Debug.printEvaluatePoint(role, direction, x, y, pointScore);
         }
 
         // 右斜
@@ -435,17 +417,9 @@ public class Board {
                 }
             }
 
-            pointScore.setCount(pointScore.totalCount());
-
-            final int countScore = pointScore.countScore();
-            count += countScore;
-            if (DEBUG && DEBUG_ROLE == role) {
-                System.out.println(role + " == 右斜向");
-                System.out.println("x: " + x + " == y: " + y);
-                System.out.println(pointScore);
-                System.out.println(countScore);
-                System.out.println("===============");
-            }
+            count += pointScore.countScore();
+            // 输出调试信息
+            Debug.printEvaluatePoint(role, direction, x, y, pointScore);
         }
 
         // 左斜
@@ -509,17 +483,9 @@ public class Board {
                 }
             }
 
-            pointScore.setCount(pointScore.totalCount());
-
-            final int countScore = pointScore.countScore();
-            count += countScore;
-            if (DEBUG && DEBUG_ROLE == role) {
-                System.out.println(role + " == 左斜向");
-                System.out.println("x: " + x + " == y: " + y);
-                System.out.println(pointScore);
-                System.out.println(countScore);
-                System.out.println("===============");
-            }
+            count += pointScore.countScore();
+            // 输出调试信息
+            Debug.printEvaluatePoint(role, direction, x, y, pointScore);
         }
 
         return count;

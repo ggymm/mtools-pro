@@ -1,17 +1,10 @@
 package com.ggymm.mtools.modules.gobang.ai.constant;
 
-import com.ggymm.mtools.modules.gobang.ai.Role;
-
-import static com.ggymm.mtools.modules.gobang.ai.Role.AI;
-
 /**
  * @author gongym
  * @version 创建时间: 2022-04-12 08:43
  */
 public class Constant {
-    public static final boolean DEBUG = true;
-    public static final Role DEBUG_ROLE = AI;
-
     public enum Direction {
         HORIZONTAL, // 横向
         VERTICAL, // 纵向

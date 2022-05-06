@@ -32,6 +32,18 @@ public class Negamax {
     private int pvCut;
 
 
+    /**
+     * 递归搜索，直到当前搜索层数结束
+     * 每次递归计算的得分情况要把对手的得分*-1，计算总得分=己方得分-对手得分
+     *
+     * @param deep   搜索层数
+     * @param alpha
+     * @param beta
+     * @param role
+     * @param step
+     * @param steps
+     * @param spread
+     */
     private void deepSearch(int deep, int alpha, int beta, Role role, int step, List<Point> steps, int spread) {
         // 落子后，首先评估棋局
         final int score = this.chessBoard.evaluateBoard(role);
@@ -62,6 +74,8 @@ public class Negamax {
     }
 
     public void search(List<Point> candidates, Role role) {
+        // 不是一次性模拟四回合
+        // 分别模拟，一回合，两回合，三回合，四回合的落子情况和得分
         for (int i = 2; i <= SEARCH_DEEP; i += 2) {
             final int score = negamax(candidates, role, i);
             System.out.println(score);
