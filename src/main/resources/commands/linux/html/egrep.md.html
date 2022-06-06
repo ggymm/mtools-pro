@@ -35,6 +35,8 @@ testfile1:This a Linux testfile!
 # 以下两行为 testfile_2 中包含Linux字符的行
 testfile_2:Linux is a free unix-type opterating system
 testfile_2:Linux test</code></pre>
+<p>过滤注释行和空白行</p>
+<pre class="shell"><code>egrep -v &#39;^\s*(#|$)&#39; filename</code></pre>
 </div>
 </body>
 </html>

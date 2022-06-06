@@ -38,431 +38,167 @@ cd tmux-2.3
 ./configure
 make &amp;&amp; make install</code></pre>
 <h2 id="快捷键使用说明">快捷键使用说明</h2>
-<table class="table-view log-set-param">
+<table>
 <tbody>
-<tr>
-<td colspan="2" align="left" valign="center" width="0">
-<div>
-Ctrl+b
-</div>
-</td>
-<td>
-<div>
-激活控制台；此时以下按键生效
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">Ctrl+b</td>
+<td style="text-align: left;">激活控制台；此时以下按键生效</td>
 </tr>
-<tr>
-<td rowspan="9" align="left" valign="center" width="0">
-<div>
-系统操作
-</div>
-</td>
-<td>
-<div>
-?
-</div>
-</td>
-<td>
-<div>
-列出所有快捷键；按q返回
-</div>
-</td>
+</tbody>
+</table>
+<h3 id="系统操作">系统操作</h3>
+<table>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 57%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">?</td>
+<td>列出所有快捷键；按q返回</td>
 </tr>
-<tr>
-<td>
-<div>
-d
-</div>
-</td>
-<td>
-<div>
-脱离当前会话；这样可以暂时返回Shell界面，输入tmux
-attach能够重新进入之前的会话
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">d</td>
+<td>脱离当前会话；这样可以暂时返回Shell界面，输入tmux
+attach能够重新进入之前的会话</td>
 </tr>
-<tr>
-<td>
-<div>
-D
-</div>
-</td>
-<td>
-<div>
-选择要脱离的会话；在同时开启了多个会话时使用
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">D</td>
+<td>选择要脱离的会话；在同时开启了多个会话时使用</td>
 </tr>
-<tr>
-<td>
-<div>
-Ctrl+z
-</div>
-</td>
-<td>
-<div>
-挂起当前会话
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">Ctrl+z</td>
+<td>挂起当前会话</td>
 </tr>
-<tr>
-<td>
-<div>
-r
-</div>
-</td>
-<td>
-<div>
-强制重绘未脱离的会话
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">r</td>
+<td>强制重绘未脱离的会话</td>
 </tr>
-<tr>
-<td>
-<div>
-s
-</div>
-</td>
-<td>
-<div>
-选择并切换会话；在同时开启了多个会话时使用
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">s</td>
+<td>选择并切换会话；在同时开启了多个会话时使用</td>
 </tr>
-<tr>
-<td>
-<div>
-:
-</div>
-</td>
-<td>
-<div>
-进入命令行模式；此时可以输入支持的命令，例如kill-server可以关闭服务器
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">:</td>
+<td>进入命令行模式；此时可以输入支持的命令，例如kill-server可以关闭服务器</td>
 </tr>
-<tr>
-<td>
-<div>
-[
-</div>
-</td>
-<td>
-<div>
-进入复制模式；此时的操作与vi/emacs相同，按q/Esc退出
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">[</td>
+<td>进入复制模式；此时的操作与vi/emacs相同，按q/Esc退出</td>
 </tr>
-<tr>
-<td>
-<div>
-~
-</div>
-</td>
-<td>
-<div>
-列出提示信息缓存；其中包含了之前tmux返回的各种提示信息
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">~</td>
+<td>列出提示信息缓存；其中包含了之前tmux返回的各种提示信息</td>
 </tr>
-<tr>
-<td rowspan="10" align="left" valign="center" width="0">
-<div>
-窗口操作
-</div>
-</td>
-<td>
-<div>
-c
-</div>
-</td>
-<td>
-<div>
-创建新窗口
-</div>
-</td>
+</tbody>
+</table>
+<h3 id="窗口操作">窗口操作</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">c</td>
+<td>创建新窗口</td>
 </tr>
-<tr>
-<td>
-<div>
-&amp;
-</div>
-</td>
-<td>
-<div>
-关闭当前窗口
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">&amp;</td>
+<td>关闭当前窗口</td>
 </tr>
-<tr>
-<td>
-<div>
-数字键
-</div>
-</td>
-<td>
-<div>
-切换至指定窗口
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">数字键</td>
+<td>切换至指定窗口</td>
 </tr>
-<tr>
-<td>
-<div>
-p
-</div>
-</td>
-<td>
-<div>
-切换至上一窗口
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">p</td>
+<td>切换至上一窗口</td>
 </tr>
-<tr>
-<td>
-<div>
-n
-</div>
-</td>
-<td>
-<div>
-切换至下一窗口
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">n</td>
+<td>切换至下一窗口</td>
 </tr>
-<tr>
-<td>
-<div>
-l
-</div>
-</td>
-<td>
-<div>
-在前后两个窗口间互相切换
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">l</td>
+<td>在前后两个窗口间互相切换</td>
 </tr>
-<tr>
-<td>
-<div>
-w
-</div>
-</td>
-<td>
-<div>
-通过窗口列表切换窗口
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">w</td>
+<td>通过窗口列表切换窗口</td>
 </tr>
-<tr>
-<td>
-<div>
-,
-</div>
-</td>
-<td>
-<div>
-重命名当前窗口；这样便于识别
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">,</td>
+<td>重命名当前窗口；这样便于识别</td>
 </tr>
-<tr>
-<td>
-<div>
-.
-</div>
-</td>
-<td>
-<div>
-修改当前窗口编号；相当于窗口重新排序
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">.</td>
+<td>修改当前窗口编号；相当于窗口重新排序</td>
 </tr>
-<tr>
-<td>
-<div>
-f
-</div>
-</td>
-<td>
-<div>
-在所有窗口中查找指定文本
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">f</td>
+<td>在所有窗口中查找指定文本</td>
 </tr>
-<tr>
-<td rowspan="14" align="left" valign="center" width="0">
-<div>
-面板操作
-</div>
-</td>
-<td>
-<div>
-”
-</div>
-</td>
-<td>
-<div>
-将当前面板平分为上下两块
-</div>
-</td>
+</tbody>
+</table>
+<h3 id="面板操作">面板操作</h3>
+<table>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 57%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">”</td>
+<td>将当前面板平分为上下两块</td>
 </tr>
-<tr>
-<td>
-<div>
-%
-</div>
-</td>
-<td>
-<div>
-将当前面板平分为左右两块
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">%</td>
+<td>将当前面板平分为左右两块</td>
 </tr>
-<tr>
-<td>
-<div>
-x
-</div>
-</td>
-<td>
-<div>
-关闭当前面板
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">x</td>
+<td>关闭当前面板</td>
 </tr>
-<tr>
-<td>
-<div>
-!
-</div>
-</td>
-<td>
-<div>
-将当前面板置于新窗口；即新建一个窗口，其中仅包含当前面板
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">!</td>
+<td>将当前面板置于新窗口；即新建一个窗口，其中仅包含当前面板</td>
 </tr>
-<tr>
-<td>
-<div>
-Ctrl+方向键
-</div>
-</td>
-<td>
-<div>
-以1个单元格为单位移动边缘以调整当前面板大小
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">Ctrl+方向键</td>
+<td>以1个单元格为单位移动边缘以调整当前面板大小</td>
 </tr>
-<tr>
-<td>
-<div>
-Alt+方向键
-</div>
-</td>
-<td>
-<div>
-以5个单元格为单位移动边缘以调整当前面板大小
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">Alt+方向键</td>
+<td>以5个单元格为单位移动边缘以调整当前面板大小</td>
 </tr>
-<tr>
-<td>
-<div>
-Space
-</div>
-</td>
-<td>
-<div>
-在预置的面板布局中循环切换；依次包括even-horizontal、even-vertical、main-horizontal、main-vertical、tiled
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">Space</td>
+<td>在预置的面板布局中循环切换；依次包括even-horizontal、even-vertical、main-horizontal、main-vertical、tiled</td>
 </tr>
-<tr>
-<td>
-<div>
-q
-</div>
-</td>
-<td>
-<div>
-显示面板编号
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">q</td>
+<td>显示面板编号</td>
 </tr>
-<tr>
-<td>
-<div>
-o
-</div>
-</td>
-<td>
-<div>
-在当前窗口中选择下一面板
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">o</td>
+<td>在当前窗口中选择下一面板</td>
 </tr>
-<tr>
-<td>
-<div>
-方向键
-</div>
-</td>
-<td>
-<div>
-移动光标以选择面板
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">方向键</td>
+<td>移动光标以选择面板</td>
 </tr>
-<tr>
-<td>
-<div>
-{
-</div>
-</td>
-<td>
-<div>
-向前置换当前面板
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">{</td>
+<td>向前置换当前面板</td>
 </tr>
-<tr>
-<td>
-<div>
-}
-</div>
-</td>
-<td>
-<div>
-向后置换当前面板
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">}</td>
+<td>向后置换当前面板</td>
 </tr>
-<tr>
-<td>
-<div>
-Alt+o
-</div>
-</td>
-<td>
-<div>
-逆时针旋转当前窗口的面板
-</div>
-</td>
+<tr class="odd">
+<td style="text-align: left;">Alt+o</td>
+<td>逆时针旋转当前窗口的面板</td>
 </tr>
-<tr>
-<td>
-<div>
-Ctrl+o
-</div>
-</td>
-<td>
-<div>
-顺时针旋转当前窗口的面板
-</div>
-</td>
+<tr class="even">
+<td style="text-align: left;">Ctrl+o</td>
+<td>顺时针旋转当前窗口的面板</td>
 </tr>
 </tbody>
 </table>

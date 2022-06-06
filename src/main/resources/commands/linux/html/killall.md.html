@@ -27,8 +27,13 @@
 <h3 id="参数">参数</h3>
 <p>进程名称：指定要杀死的进程名称。</p>
 <h3 id="实例">实例</h3>
-<p>杀死所有同名进程</p>
-<pre class="shell"><code>killall vi</code></pre>
+<pre class="shell"><code># 杀死所有同名进程
+killall vi
+# 指定向进程发送的信号
+killall -9 vi
+# 0信号表示不向进程发送信号, 可通过返回值判断进程是否存在, 0(存在)1(不存在)
+killall -0 vi
+echo $?</code></pre>
 </div>
 </body>
 </html>

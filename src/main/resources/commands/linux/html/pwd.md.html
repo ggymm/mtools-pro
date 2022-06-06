@@ -9,18 +9,12 @@
 <div id="wrapper">  
 <h1 id="pwd">pwd</h1>
 <p>显示当前工作目录的绝对路径。</p>
-<h2 id="目录">目录</h2>
-<ul>
-<li><a href="#内建命令">bash内建命令</a></li>
-<li><a href="#外部命令">GNU coreutils中的命令</a></li>
-</ul>
+<h2 id="补充说明">补充说明</h2>
+<p>pwd（英文全拼：print working directory）
+命令用于显示用户当前所在的工作目录（以绝对路径显示）。</p>
 <h2 id="内建命令">内建命令</h2>
 <h4 id="概要">概要</h4>
 <pre class="shell"><code>pwd [-LP]</code></pre>
-<h4 id="主要用途">主要用途</h4>
-<ul>
-<li>显示当前工作目录。</li>
-</ul>
 <h4 id="选项">选项</h4>
 <pre class="shell"><code>-L （默认值）打印环境变量&quot;$PWD&quot;的值，可能为符号链接。
 -P 打印当前工作目录的物理位置。</code></pre>
@@ -33,7 +27,7 @@
 <h2 id="外部命令">外部命令</h2>
 <h4 id="概要-1">概要</h4>
 <pre class="shell"><code>pwd [OPTION]...</code></pre>
-<h4 id="主要用途-1">主要用途</h4>
+<h4 id="主要用途">主要用途</h4>
 <ul>
 <li>显示当前工作目录。</li>
 </ul>
@@ -50,6 +44,24 @@
 <li>启动或关闭内建命令请查看<code>enable</code>命令，关于同名优先级的问题请查看<code>builtin</code>命令的例子部分的相关讨论。</li>
 <li>在不禁用内建且当前环境没有定义<code>pwd</code>函数的情况下，使用<code>/usr/bin/pwd</code>指向<code>coreutils</code>的<code>pwd</code>，使用<code>pwd</code>指向bash内建的<code>pwd</code>。</li>
 </ol>
+<h2 id="例子">例子</h2>
+<p>查看当前所在路径</p>
+<pre class="shell"><code>[root@localhost var]# pwd
+/var</code></pre>
+<p>显示软连接文件最终指向的文件路径</p>
+<pre class="shell"><code>[root@localhost ~]# cd /var/   # 进入/var目录，该目录下有个 mail 软连接文件
+[root@localhost var]# ls -al
+total 164
+...
+lrwxrwxrwx  1 root root   10 Oct 17  2015 mail -&gt; spool/mail
+
+[root@localhost var]# cd mail/   # 进入 mail 目录，mail 为连接文件。
+[root@localhost mail]# pwd       # 默认，使用连接文件，直接显示连接文件全路径。
+/var/mail</code></pre>
+<p>使用 <code>-P</code>
+参数，显示的不是逻辑路径，而是连接(软连接)文件最终指向的文件</p>
+<pre class="shell"><code>[root@localhost mail]# pwd -P    
+/var/spool/mail</code></pre>
 </div>
 </body>
 </html>

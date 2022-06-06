@@ -23,7 +23,11 @@ daemon周期性建立的，locate命令在搜寻数据库时比由整个由硬�
 <p>locate指令和find找寻档案的功能类似，但locate是透过update程序将硬盘中的所有档案和目录资料先建立一个索引数据库，在
 执行loacte时直接找该索引，查询速度会较快，索引数据库一般是由操作系统管理，但也可以直接下达update强迫系统立即修改索引数据库。</p>
 <h3 id="语法">语法</h3>
-<pre class="shell"><code>locate [选择参数] [样式]</code></pre>
+<pre class="shell"><code>locate [-d  path | --database=path] [-e | -E | --[non-]existing] [-i |
+       --ignore-case] [-0 | --null] [-c | --count] [-w |  --wholename]  [-b  |
+       --basename]  [-l  N  |  --limit=N]  [-S | --statistics] [-r | --regex ]
+       [--regextype R] [--max-database-age D] [-P | -H  |  --nofollow]  [-L  |
+       --follow] [--version] [-A | --all] [-p | --print] [--help] pattern...</code></pre>
 <h3 id="选项">选项</h3>
 <pre class="shell"><code>-b, --basename  # 仅匹配路径名的基本名称
 -c, --count     # 只输出找到的数量
@@ -46,7 +50,7 @@ daemon周期性建立的，locate命令在搜寻数据库时比由整个由硬�
 -i, --ignore-case     # 忽略大小写
 -V, --version         # 显示版本信息</code></pre>
 <h3 id="实例">实例</h3>
-<p>实例1：查找和pwd相关的所有文件</p>
+<p>实例1：查找和 <code>pwd</code> 相关的所有文件</p>
 <pre class="shell"><code>root ~ # locate pwd
 /bin/pwd
 /etc/.pwd.lock
@@ -63,7 +67,7 @@ daemon周期性建立的，locate命令在搜寻数据库时比由整个由硬�
 /usr/share/help/cs/empathy/irc-join-pwd.page
 /usr/share/help/de/empathy/irc-join-pwd.page
 /usr/share/help/el/empathy/irc-join-pwd.page</code></pre>
-<p>实例2： 搜索etc目录下所有以sh开头的文件</p>
+<p>实例2： 搜索 etc 目录下所有以 sh 开头的文件</p>
 <pre class="shell"><code>root ~ # locate /etc/sh
 /etc/shadow
 /etc/shadow-
@@ -76,6 +80,8 @@ daemon周期性建立的，locate命令在搜寻数据库时比由整个由硬�
 /etc/mailcap.order
 /etc/manpath.config
 /etc/mate-settings-daemon</code></pre>
+<p>忽略大小写搜索当前用户目录下所有以 <code>r</code> 开头的文件 ：</p>
+<pre class="shell"><code>locate -i ~/r</code></pre>
 </div>
 </body>
 </html>

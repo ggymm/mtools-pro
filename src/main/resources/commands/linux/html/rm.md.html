@@ -32,14 +32,18 @@ Remove example ?y（删除文件example)</code></pre>
 <p>删除当前目录下除隐含文件外的所有文件和子目录</p>
 <pre class="shell"><code># rm -r *</code></pre>
 <p>应注意，这样做是非常危险的!</p>
-<p><strong>rm 命令删除当前目录下的 package-lock.json 文件</strong></p>
+<p><strong>删除当前目录下的 package-lock.json 文件</strong></p>
 <pre class="shell"><code>find .  -name &quot;package-lock.json&quot; -exec rm -rf {} \;</code></pre>
-<p><strong>rm 命令删除当前目录下的 node_modules 目录</strong></p>
+<p>**查找 *.html 结尾的文件并删除**</p>
+<pre class="shell"><code>find ./docs -name &quot;*.html&quot; -exec rm -rf {} \;</code></pre>
+<p>**删除当前项目下 *.html 结尾的文件**</p>
+<pre class="shell"><code>rm -rf *.html</code></pre>
+<p><strong>删除当前目录下的 node_modules 目录</strong></p>
 <pre class="shell"><code>find . -name &#39;node_modules&#39; -type d -prune -exec rm -rf &#39;{}&#39; +</code></pre>
-<p><strong>rm 命令删除文件</strong></p>
+<p><strong>删除文件</strong></p>
 <pre class="shell"><code># rm 文件1 文件2 ...
 rm testfile.txt</code></pre>
-<p><strong>rm 命令删除目录</strong></p>
+<p><strong>删除目录</strong></p>
 <blockquote>
 <p>rm -r [目录名称] -r 表示递归地删除目录下的所有文件和目录。 -f
 表示强制删除</p>
