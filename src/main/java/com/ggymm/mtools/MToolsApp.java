@@ -3,8 +3,8 @@ package com.ggymm.mtools;
 import com.dlsc.workbenchfx.Workbench;
 import com.ggymm.mtools.controller.CustomTab;
 import com.ggymm.mtools.modules.coder.CoderModule;
+import com.ggymm.mtools.modules.devops.DevopsModule;
 import com.ggymm.mtools.modules.download.DownloadModule;
-import com.ggymm.mtools.modules.emoji.EmojiModule;
 import com.ggymm.mtools.modules.encode.EncodeModule;
 import com.ggymm.mtools.modules.gobang.GobangModule;
 import com.ggymm.mtools.modules.linux.LinuxCommandModule;
@@ -31,7 +31,8 @@ public class MToolsApp extends Application {
 
     @Override
     public void start(Stage stage) {
-        final Scene scene = new Scene(initWorkbench());
+        initWorkbench(stage);
+        final Scene scene = new Scene(this.workbench);
 
         stage.setTitle("工具箱");
         stage.setScene(scene);
@@ -46,27 +47,25 @@ public class MToolsApp extends Application {
         StyleUtils.initStyle(scene);
     }
 
-    private Workbench initWorkbench() {
+    private void initWorkbench(Stage stage) {
         final MenuItem[] menuItems = initMenu();
 
-        workbench = Workbench.builder(
-                        new CoderModule(),
+        this.workbench = Workbench.builder(
+                        new CoderModule(stage),
                         new EncodeModule(),
                         new LogcatModule(),
 
                         new LinuxCommandModule(),
-                        new ToolsModule(),
-
-                        new DownloadModule(),
                         new QrCodeModule(),
-                        new EmojiModule(),
+                        new DownloadModule(),
+
+                        new ToolsModule(),
+                        new DevopsModule(),
                         new GobangModule()
                 ).navigationDrawerItems(menuItems)
                 .modulesPerPage(9)
                 .tabFactory(CustomTab::new)
                 .build();
-
-        return workbench;
     }
 
     private MenuItem[] initMenu() {
