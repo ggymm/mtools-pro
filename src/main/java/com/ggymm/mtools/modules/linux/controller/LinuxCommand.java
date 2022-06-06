@@ -19,7 +19,7 @@ public class LinuxCommand {
         final URL resource = LinuxCommand.class.getResource("/commands/linux/index.json");
         if (resource != null) {
             final String content = FileUtil.readString(resource, StandardCharsets.UTF_8);
-            commands = JSONUtil.parseObj(content, true, true);
+            commands = JSONUtil.parseObj(content, true);
         }
     }
 }

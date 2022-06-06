@@ -9,46 +9,75 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
+            <version>1.18.24</version>
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>5.7.21</version>
+            <version>5.8.2</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>22.0</version>
+            <version>31.0.1-jre</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>17.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>17.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>17.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>17.0.1</version>
         </dependency>
 
         <!-- 基础框架 -->
         <dependency>
             <groupId>com.dlsc.workbenchfx</groupId>
             <artifactId>workbenchfx-core</artifactId>
-            <version>8.1.0</version>
+            <version>11.3.1</version>
         </dependency>
         <dependency>
             <groupId>com.jfoenix</groupId>
             <artifactId>jfoenix</artifactId>
-            <version>8.0.10</version>
+            <version>9.0.10</version>
         </dependency>
 
         <!-- 日志配置 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.12</version>
+            <version>1.7.32</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -92,7 +121,7 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>4.0.3</version>
+            <version>5.0.1</version>
         </dependency>
         <dependency>
             <groupId>commons-dbutils</groupId>
@@ -107,7 +136,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
     <repositories>
         <repository>
@@ -135,6 +163,18 @@
         </repository>
     </repositories>
 
+    <profiles>
+        <profile>
+            <id>jdk11</id>
+            <activation>
+                <jdk>11</jdk>
+            </activation>
+            <properties>
+                <java.version>11</java.version>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <finalName>mtools</finalName>
         <resources>
@@ -154,20 +194,27 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <source>11</source>
+                    <target>11</target>
+                    <encoding>UTF-8</encoding>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.14</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                    <encoding>UTF-8</encoding>
+                    <skipTests>true</skipTests>
                 </configuration>
             </plugin>
             <plugin>
