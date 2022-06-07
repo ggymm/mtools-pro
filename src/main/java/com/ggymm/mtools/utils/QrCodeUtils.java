@@ -20,7 +20,6 @@ import java.util.Map;
  */
 public class QrCodeUtils {
 
-    private static final String format = "png";
     private static final Map<EncodeHintType, Object> hints = new HashMap<>();
     private static final Map<DecodeHintType, Object> dHints = new HashMap<>();
 
