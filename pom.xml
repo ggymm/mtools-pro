@@ -55,11 +55,6 @@
             <artifactId>javafx-controls</artifactId>
             <version>17.0.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>17.0.1</version>
-        </dependency>
 
         <!-- 基础框架 -->
         <dependency>

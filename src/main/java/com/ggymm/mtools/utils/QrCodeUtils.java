@@ -49,7 +49,7 @@ public class QrCodeUtils {
         // 按照自定义边框生成新的BitMatrix
         final BitMatrix resMatrix = new BitMatrix(resWidth, resHeight);
         resMatrix.clear();
-        //循环，将二维码图案绘制到新的bitMatrix中
+        // 循环，将二维码图案绘制到新的bitMatrix中
         for (int i = margin; i < resWidth - margin; i++) {
             for (int j = margin; j < resHeight - margin; j++) {
                 if (matrix.get(i - margin + rec[0], j - margin + rec[1])) {
