@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  * @author gongym
  * @version 创建时间: 2022-01-04 13:21
  */
-public class MToolsApp extends Application {
+public class App extends Application {
 
     private Workbench workbench;
 

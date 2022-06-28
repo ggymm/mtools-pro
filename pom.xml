@@ -222,7 +222,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.ggymm.mtools.MToolsApp</mainClass>
+                            <mainClass>com.ggymm.mtools.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

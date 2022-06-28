@@ -35,6 +35,5 @@ public class EncodeModule extends WorkbenchModule {
 
     @Override
     public void deactivate(){
-
     }
 }

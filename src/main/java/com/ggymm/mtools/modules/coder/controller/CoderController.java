@@ -188,6 +188,7 @@ public class CoderController implements Initializable {
         this.genCode.setOnMouseClicked(event -> {
             // 禁用按钮
             this.genCode.setDisable(true);
+            this.genCode.setText("正在生成");
 
             if (this.currentDatabase == null) {
                 ToastUtils.error(this.snackbar, "错误, 未选择数据库");
@@ -315,6 +316,7 @@ public class CoderController implements Initializable {
             Platform.runLater(() -> {
                 ToastUtils.info(this.snackbar, "生成完毕");
                 this.genCode.setDisable(false);
+                this.genCode.setText("生成代码");
             });
         }).start();
     }
